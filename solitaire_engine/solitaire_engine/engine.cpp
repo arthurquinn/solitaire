@@ -2,11 +2,15 @@
 #include "engine.h"
 
 
-Engine::Engine()
-{
+Engine::Engine() {
+	deck = new Deck();
+}
+
+void Engine::init() {
+	deck->shuffle();
 }
 
 
-Engine::~Engine()
-{
+Engine::~Engine() {
+	delete deck;
 }
