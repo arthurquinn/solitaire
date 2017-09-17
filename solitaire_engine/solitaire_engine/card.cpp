@@ -3,6 +3,7 @@
 
 
 Card::Card(const suit_t suit, const rank_t rank) : suit(suit), rank(rank) {
+	to_str[2] = '\0';
 	switch (suit) {
 	case HEARTS:
 		to_str[0] = 'h';
@@ -19,7 +20,6 @@ Card::Card(const suit_t suit, const rank_t rank) : suit(suit), rank(rank) {
 	default:
 		to_str[0] = 'z';
 	};
-
 	switch (rank) {
 	case 0:
 		to_str[1] = 'a';
