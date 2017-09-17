@@ -1,7 +1,6 @@
 #pragma once
 #include "card.h"
-
-#define NUM_CARDS 52
+#include "constants.h"
 
 class Deck
 {
@@ -11,6 +10,7 @@ private:
 public:
 	Deck();
 	void shuffle();
+	void print();
 	~Deck();
 };
 

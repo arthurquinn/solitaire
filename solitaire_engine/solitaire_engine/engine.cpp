@@ -8,6 +8,7 @@ Engine::Engine() {
 
 void Engine::init() {
 	deck->shuffle();
+	deck->print();
 }
 
 
