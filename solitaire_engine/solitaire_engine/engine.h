@@ -9,6 +9,7 @@ private:
 public:
 	Engine();
 	void init();
+	void print_pile(const pile_t& pile) const;
 	~Engine();
 };
 

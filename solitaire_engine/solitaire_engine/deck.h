@@ -12,7 +12,7 @@ public:
 	Deck();
 	void shuffle();
 	void draw_three(pile_t& target_pile);
-	void print();
+	void print() const;
 	~Deck();
 };
 

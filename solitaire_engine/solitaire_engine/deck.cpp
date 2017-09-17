@@ -26,7 +26,7 @@ void Deck::draw_three(pile_t& target_pile) {
 	}
 }
 
-void Deck::print() {
+void Deck::print() const {
 	for (Card * card : cards) {
 		std::cout << *card << std::endl;
 	}
