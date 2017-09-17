@@ -53,6 +53,10 @@ std::ostream& operator<<(std::ostream& stream, const Card& card) {
 	return stream << card.to_str;
 }
 
+const char * Card::as_str() const {
+	return to_str;
+}
+
 Card::~Card() {
 	delete to_str;
 }
