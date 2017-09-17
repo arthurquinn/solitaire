@@ -8,8 +8,9 @@ Engine::Engine() {
 
 void Engine::init() {
 	deck.shuffle();
-	deck.draw_three(draw_pile);
-	deck.print();
+	while (deck.count() >= 3) {
+		deck.draw_three(draw_pile);
+	}
 	print_pile(draw_pile);
 }
 

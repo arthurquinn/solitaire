@@ -26,6 +26,10 @@ void Deck::draw_three(pile_t& target_pile) {
 	}
 }
 
+const int Deck::count() const {
+	return cards.size();
+}
+
 void Deck::print() const {
 	for (Card * card : cards) {
 		std::cout << *card << std::endl;

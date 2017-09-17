@@ -12,6 +12,7 @@ public:
 	Deck();
 	void shuffle();
 	void draw_three(pile_t& target_pile);
+	const int count() const;
 	void print() const;
 	~Deck();
 };
