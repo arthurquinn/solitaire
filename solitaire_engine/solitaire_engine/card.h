@@ -1,4 +1,5 @@
 #pragma once
+#include "constants.h"
 
 typedef unsigned short int rank_t;
 typedef unsigned short int suit_t;
