@@ -8,7 +8,11 @@ Engine::Engine() {
 
 void Engine::init() {
 	deck.shuffle();
+	deck.draw_three(draw_pile);
 	deck.print();
+	for (Card * card : draw_pile) {
+		std::cout << "Draw: " << *card << std::endl;
+	}
 }
 
 

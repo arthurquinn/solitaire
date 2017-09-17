@@ -15,6 +15,17 @@ void Deck::shuffle() {
 	std::shuffle(std::begin(cards), std::end(cards), rand_eng);
 }
 
+void Deck::draw_three(pile_t& target_pile) {
+	if (cards.size() >= 3) {
+		for (int i = 0; i < 3; i++) {
+			target_pile.push_back(cards.back());
+			cards.pop_back();
+		}
+	} else {
+		throw std::length_error("draw three: there are less than three cards remaining in the deck");
+	}
+}
+
 void Deck::print() {
 	for (Card * card : cards) {
 		std::cout << *card << std::endl;
