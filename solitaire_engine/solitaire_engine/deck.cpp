@@ -7,7 +7,7 @@ Deck::Deck() {
 	for (int i = 0; i < NUM_CARDS; i++) {
 		rank_t rank = i % NUM_CARDS_IN_SUIT;
 		suit_t suit = i / NUM_CARDS_IN_SUIT;
-		cards[i] = new Card(suit, rank);
+		cards.push_back(new Card(suit, rank));
 	}
 }
 
@@ -16,14 +16,13 @@ void Deck::shuffle() {
 }
 
 void Deck::print() {
-	for (int i = 0; i < NUM_CARDS; i++) {
-		Card card = *cards[i];
-		std::cout << card << std::endl;
+	for (Card * card : cards) {
+		std::cout << *card << std::endl;
 	}
 }
 
 Deck::~Deck() {
-	for (int i = 0; i < NUM_CARDS; i++) {
-		delete cards[i];
+	for (Card * card : cards) {
+		delete card;
 	}
 }

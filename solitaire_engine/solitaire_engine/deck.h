@@ -6,7 +6,7 @@ class Deck
 {
 private:
 	decltype(std::default_random_engine()) rand_eng;
-	Card * cards[NUM_CARDS];
+	std::vector<Card*> cards;
 public:
 	Deck();
 	void shuffle();
