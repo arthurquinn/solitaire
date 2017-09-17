@@ -4,7 +4,7 @@
 class Engine
 {
 private:
-	Deck * deck;
+	Deck deck;
 public:
 	Engine();
 	void init();
