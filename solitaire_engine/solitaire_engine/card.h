@@ -9,7 +9,7 @@ class Card
 private:
 	const suit_t suit;
 	const rank_t rank;
-	const char * to_str;
+	char to_str[4];
 
 	friend std::ostream& operator<<(std::ostream& stream, const Card& card);
 
