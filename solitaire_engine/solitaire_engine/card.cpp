@@ -2,7 +2,13 @@
 #include "card.h"
 
 
-Card::Card(const suit_t suit, const rank_t rank) : suit(suit), rank(rank) {
+Card::Card(const suit_t suit, const rank_t rank) : suit(suit), rank(rank), to_str(make_str(suit, rank)) {
+
+}
+
+// private static method
+const char * Card::make_str(suit_t suit, rank_t rank) {
+	char to_str[4];
 	to_str[2] = '\0';
 	switch (suit) {
 	case HEARTS:
@@ -42,6 +48,7 @@ Card::Card(const suit_t suit, const rank_t rank) : suit(suit), rank(rank) {
 		to_str[1] = static_cast<char>(rank + 49);
 		break;
 	}
+	return to_str;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Card& card) {

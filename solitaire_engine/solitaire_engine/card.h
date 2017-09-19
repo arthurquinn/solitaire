@@ -9,8 +9,10 @@ class Card
 private:
 	const suit_t suit;
 	const rank_t rank;
-	char to_str[4];
+	const char * to_str;
 	bool visible = false;
+
+	static const char * make_str(suit_t suit, rank_t rank);
 
 	friend std::ostream& operator<<(std::ostream& stream, const Card& card);
 
