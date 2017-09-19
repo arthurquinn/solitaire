@@ -2,53 +2,48 @@
 #include "card.h"
 
 
-Card::Card(const suit_t suit, const rank_t rank) : suit(suit), rank(rank), to_str(make_str(suit, rank)) {
-
-}
-
-// private static method
-const char * Card::make_str(suit_t suit, rank_t rank) {
-	char to_str[4];
-	to_str[2] = '\0';
+Card::Card(const suit_t suit, const rank_t rank) : suit(suit), rank(rank) {
+	char * str = new char[4];
+	str[2] = '\0';
 	switch (suit) {
 	case HEARTS:
-		to_str[0] = 'h';
+		str[0] = 'h';
 		break;
 	case DIAMONDS:
-		to_str[0] = 'd';
+		str[0] = 'd';
 		break;
 	case SPADES:
-		to_str[0] = 's';
+		str[0] = 's';
 		break;
 	case CLUBS:
-		to_str[0] = 'c';
+		str[0] = 'c';
 		break;
 	default:
-		to_str[0] = 'z';
+		str[0] = 'z';
 	};
 	switch (rank) {
 	case 0:
-		to_str[1] = 'a';
+		str[1] = 'a';
 		break;
 	case 9:
-		to_str[1] = '1';
-		to_str[2] = '0';
-		to_str[3] = '\0';
+		str[1] = '1';
+		str[2] = '0';
+		str[3] = '\0';
 		break;
 	case 10:
-		to_str[1] = 'j';
+		str[1] = 'j';
 		break;
 	case 11:
-		to_str[1] = 'q';
+		str[1] = 'q';
 		break;
 	case 12:
-		to_str[1] = 'k';
+		str[1] = 'k';
 		break;
 	default:
-		to_str[1] = static_cast<char>(rank + 49);
+		str[1] = static_cast<char>(rank + 49);
 		break;
 	}
-	return to_str;
+	to_str = str;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Card& card) {
@@ -64,5 +59,5 @@ void Card::flip() {
 }
 
 Card::~Card() {
-
+	delete to_str;
 }
