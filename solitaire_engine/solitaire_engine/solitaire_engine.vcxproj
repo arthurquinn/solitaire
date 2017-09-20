@@ -149,7 +149,6 @@
     <ClInclude Include="card.h" />
     <ClInclude Include="card_pile.h" />
     <ClInclude Include="constants.h" />
-    <ClInclude Include="deck.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="foundation_pile.h" />
     <ClInclude Include="stdafx.h" />
@@ -161,7 +160,6 @@
   <ItemGroup>
     <ClCompile Include="card.cpp" />
     <ClCompile Include="card_pile.cpp" />
-    <ClCompile Include="deck.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="foundation_pile.cpp" />
     <ClCompile Include="solitaireengine.cpp" />
