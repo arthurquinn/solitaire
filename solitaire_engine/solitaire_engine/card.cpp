@@ -58,6 +58,10 @@ void Card::flip(const bool face_up) {
 	visible = face_up;
 }
 
+const bool Card::is_visible() const {
+	return visible;
+}
+
 Card::~Card() {
 	delete to_str;
 }

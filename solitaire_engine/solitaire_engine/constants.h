@@ -7,3 +7,6 @@
 #define DIAMONDS 1
 #define SPADES 2
 #define CLUBS 3
+
+#define NUM_FOUNDATION_PILES 4
+#define NUM_TABLEAU_PILES 7

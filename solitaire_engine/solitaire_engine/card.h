@@ -18,6 +18,7 @@ public:
 	Card(const suit_t suit, const rank_t rank);
 	const char * as_str() const;
 	void flip(const bool face_up);
+	const bool is_visible() const;
 	~Card();
 };
 
