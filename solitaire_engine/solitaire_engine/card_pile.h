@@ -5,10 +5,11 @@ typedef std::vector<Card*> pile_t;
 
 class CardPile
 {
-private:
-	pile_t pile;
-public:
+protected:
 	CardPile();
 	~CardPile();
+	pile_t pile;
+public:
+	virtual void push(Card* card) = 0;
 };
 
