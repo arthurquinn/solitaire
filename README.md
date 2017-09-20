@@ -1,1 +1,3 @@
-# solitaire
+### Solitaire ###
+
+The goal of this project is to develop a solitaire engine in C++ that can run the game of solitaire and all related logic in an encapsulated black box. Around this black box we will develop (for now) a GUI written in Python in which the player can interact with the engine to play their game. Eventually this concept will be expanded to feature a browser GUI and the engine on a remote server controlled by a webserver.
