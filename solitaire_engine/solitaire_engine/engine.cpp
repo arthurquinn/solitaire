@@ -7,17 +7,13 @@ Engine::Engine() {
 }
 
 void Engine::init() {
-	deck.shuffle();
-	while (deck.count() >= 3) {
-		deck.draw_three(draw_pile);
+	for (int i = 0; i < NUM_CARDS; i++) {
+		rank_t rank = i % NUM_CARDS_IN_SUIT;
+		suit_t suit = i / NUM_CARDS_IN_SUIT;
+		stock.push(new Card(suit, rank));
 	}
-	print_pile(draw_pile);
-}
-
-void Engine::print_pile(const pile_t& pile) const {
-	for (Card * card : pile) {
-		std::cout << "Draw: " << *card << std::endl;
-	}
+	stock.shuffle();
+	stock.print();
 }
 
 
