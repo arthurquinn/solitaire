@@ -54,8 +54,8 @@ const char * Card::as_str() const {
 	return to_str;
 }
 
-void Card::flip() {
-	visible = !visible;
+void Card::flip(const bool face_up) {
+	visible = face_up;
 }
 
 Card::~Card() {
