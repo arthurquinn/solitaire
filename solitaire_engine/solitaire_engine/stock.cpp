@@ -26,6 +26,16 @@ const bool Stock::draw_three(CardPile& target_pile) {
 	return true;
 }
 
+const bool Stock::draw(CardPile& target_pile, const bool face_up) {
+	if (pile.size() < 1)
+		return false;
+	Card* card = pile.back();
+	pile.pop_back();
+	card->flip(face_up);
+	target_pile.push(card);
+	return true;
+}
+
 const int Stock::count() const {
 	return pile.size();
 }

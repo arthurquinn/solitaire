@@ -2,11 +2,15 @@
 #include "tableau_pile.h"
 
 
-TableauPile::TableauPile()
-{
+TableauPile::TableauPile() {
+
+}
+
+void TableauPile::push(Card* card) {
+
 }
 
 
-TableauPile::~TableauPile()
-{
+TableauPile::~TableauPile() {
+
 }

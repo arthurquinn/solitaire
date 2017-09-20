@@ -17,6 +17,10 @@ public:
 	// returns false if there were not enough cards in the deck to successfully draw_three, true if draw_three succeeded
 	const bool draw_three(CardPile& target_pile);
 
+	// draw a single card from the stock and specify whether or not it is a face_up or face_down draw
+	// returns true if the stock has a card and the draw succeeds, false otherwise 
+	const bool draw(CardPile& target_pile, const bool face_up);
+
 	// returns the number of cards in the stock
 	const int count() const;
 
