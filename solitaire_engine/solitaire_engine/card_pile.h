@@ -10,6 +10,6 @@ protected:
 	~CardPile();
 	pile_t pile;
 public:
-	virtual void push(Card* card) = 0;
+	virtual void push(Card* card);
 };
 

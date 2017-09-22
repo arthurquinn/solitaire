@@ -7,10 +7,7 @@
 class Engine
 {
 private:
-	Stock stock;
-	Talon talon;
-	FoundationPile foundation[NUM_FOUNDATION_PILES];
-	TableauPile tableau[NUM_TABLEAU_PILES];
+	CardPile card_piles[13];
 public:
 	Engine();
 	void init();
