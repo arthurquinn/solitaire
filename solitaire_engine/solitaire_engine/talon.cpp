@@ -11,4 +11,5 @@ void Talon::push(Card* card) {
 }
 
 Talon::~Talon() {
+
 }

@@ -11,10 +11,11 @@ private:
 	Talon talon;
 	FoundationPile foundation[NUM_FOUNDATION_PILES];
 	TableauPile tableau[NUM_TABLEAU_PILES];
+
 public:
 	Engine();
 	void init();
 	void deal();
+  void activate_piles(const bool active);
 	~Engine();
 };
-

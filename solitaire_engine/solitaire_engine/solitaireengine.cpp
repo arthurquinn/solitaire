@@ -12,10 +12,11 @@
 
 int main()
 {
-	//Engine engine;
-	//engine.init();
-	//engine.deal();
-	//std::cin.get();
+	Engine engine;
+	engine.init();
+	engine.deal();
+
+  std::cout << std::endl;
 
 	CommandResult cr(true, "bad stuff");
 	cr.update_push(0, "cq");
