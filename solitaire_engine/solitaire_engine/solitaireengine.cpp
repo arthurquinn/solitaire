@@ -24,6 +24,8 @@ int main()
     Command cmd(line);
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     std::cout << cmd.get_method() << cmd.get_dest() << cmd.get_src() << std::endl;
+    //CommandResult cr = engine.run(cmd);
+    //std::cout << cr.stringify() << std::endl;
   }
 
   //std::cout << "Exiting..." << std::endl;

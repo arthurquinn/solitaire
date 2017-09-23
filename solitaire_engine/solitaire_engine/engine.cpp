@@ -44,37 +44,36 @@ void Engine::activate_piles(const bool active) {
   }
 }
 
-/*void Engine::move(Command& cmd) {
-  std::string action = cmd.get_command();
+const CommandResult Engine::run(const Command& cmd) {
 
-  if (action == DRAW_ONE) {
-    stock.draw(talon, true);
-  } 
-  else if(action == DRAW_THREE) {
-    stock.draw_three(talon);
-  } 
-  else if(action == MOVE) {
-    // Get command details
-    PileType src = cmd.get_source();
-    PileType dest = cmd.get_destination();
+  //if (action == DRAW_ONE) {
+  //  stock.draw(talon, true);
+  //} 
+  //else if(action == DRAW_THREE) {
+  //  stock.draw_three(talon);
+  //} 
+  //else if(action == MOVE) {
+  //  // Get command details
+  //  PileType src = cmd.get_source();
+  //  PileType dest = cmd.get_destination();
 
-    if(src != dest) {
-      // Get index of card in tableau pile (as it can be a group of cards)
-      unsigned short tcard_index = cmd.get_tcard_index();
+  //  if(src != dest) {
+  //    // Get index of card in tableau pile (as it can be a group of cards)
+  //    unsigned short tcard_index = cmd.get_tcard_index();
 
-      // Get the source cards
-      pile_t source_cards = get_source_cards(src, tcard_index);
+  //    // Get the source cards
+  //    pile_t source_cards = get_source_cards(src, tcard_index);
 
-      // Attempt to move to correct destination
-      if (dest >= PileType::foundation && dest < PileType::tableau) {
-        move_to_foundation(source_cards, dest);
-      }
-      else if (dest >= PileType::tableau && static_cast<int>(dest) < LAST_PILE_INDEX) {
-        move_to_tableau(source_cards, dest);
-      }
-    }
-  }
-}*/
+  //    // Attempt to move to correct destination
+  //    if (dest >= PileType::foundation && dest < PileType::tableau) {
+  //      move_to_foundation(source_cards, dest);
+  //    }
+  //    else if (dest >= PileType::tableau && static_cast<int>(dest) < LAST_PILE_INDEX) {
+  //      move_to_tableau(source_cards, dest);
+  //    }
+  //  }
+  //}
+}
 
 /*\ // =================================
 |*|

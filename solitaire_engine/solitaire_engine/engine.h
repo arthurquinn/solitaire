@@ -3,6 +3,8 @@
 #include "talon.h"
 #include "foundation_pile.h"
 #include "tableau_pile.h"
+#include "command_result.h"
+#include "command.h"
 
 class Engine
 {
@@ -22,7 +24,5 @@ public:
   void init();
   void deal();
   void activate_piles(const bool active);
-
-  // TODO: Uncomment once Command class is implemented
-  //void move(Command& cmd);
+  const CommandResult run(const Command& cmd);
 };
