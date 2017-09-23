@@ -89,6 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="card.h" />
     <ClInclude Include="card_pile.h" />
+    <ClInclude Include="command_result.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="foundation_pile.h" />
@@ -160,6 +162,7 @@
   <ItemGroup>
     <ClCompile Include="card.cpp" />
     <ClCompile Include="card_pile.cpp" />
+    <ClCompile Include="command_result.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="foundation_pile.cpp" />
     <ClCompile Include="solitaireengine.cpp" />

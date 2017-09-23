@@ -15,6 +15,9 @@
 #include <iterator>
 #include <iostream>
 #include <vector>
+#include <map>
+#include <string>
+#include <sstream>
 
 
 
