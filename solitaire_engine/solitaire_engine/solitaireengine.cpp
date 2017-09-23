@@ -5,22 +5,28 @@
 #include "engine.h"
 #include "constants.h"
 #include "command_result.h"
+#include "command.h"
 #include "response.h"
-
 
 // TODO: Delete all print() methods from classes as they are only used for debugging
 // TODO: Alternatively, switch these print methods into log messages for easier debugging which can be turned off in deployment
 
 int main()
 {
+
+
+  //std::cout << "Running..." << std::endl;
+
   Engine engine;
   engine.init();
-
-  for (int i = 0; i < 3; i++) {
+  std::cout << Response::make_response(ENGINE_RESPONSE_READY) << std::endl;
+  for (std::string line; std::getline(std::cin, line);) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    std::string response = Response::make_response(ENGINE_RESPONSE_READY);
-    std::cout << response << std::endl;
+    std::cout << line << std::endl;
   }
+
+  //std::cout << "Exiting..." << std::endl;
+  //std::cin.get();
 
   //engine.deal();
   //
