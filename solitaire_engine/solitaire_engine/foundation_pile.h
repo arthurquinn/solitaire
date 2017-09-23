@@ -7,5 +7,5 @@ public:
   FoundationPile();
   ~FoundationPile();
 
-  void push(Card* card) override;
+  const bool push(Card* card) override;
 };

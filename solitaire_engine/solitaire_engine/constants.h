@@ -13,7 +13,7 @@
 
 #define NUM_FOUNDATION_PILES 4
 #define NUM_TABLEAU_PILES 7
-
+#define LAST_PILE_INDEX 13
 
 #define RESPONSE_KEY "response"
 #define REASON_KEY "reason"
@@ -25,3 +25,7 @@
 #define ENGINE_RESPONSE_OK "ok"
 #define ENGINE_RESPONSE_READY "ready"
 #define ENGINE_RESPONSE_ERROR "error"
+
+#define MOVE "move"
+#define DRAW_ONE "draw_one"
+#define DRAW_THREE "draw_three"

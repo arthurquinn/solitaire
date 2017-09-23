@@ -9,7 +9,7 @@ public:
   Stock();
 
   // push a card to the stock and flip it face down
-  void push(Card* card) override;
+  const bool push(Card* card) override;
 
   // shuffle all cards in the stock
   void shuffle();

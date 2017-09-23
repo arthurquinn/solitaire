@@ -25,9 +25,9 @@ public:
   const rank_t get_rank() const;
   const color_t get_color() const;
 
-  bool isOppositeColor(Card* card) const;
-  bool isRankLower(Card* card) const;
-  bool isSameSuit(Card* card) const;
+  const bool is_opposite_color(Card* card) const;
+  const bool is_rank_lower(Card* card) const;
+  const bool is_same_suit(Card* card) const;
 
   ~Card();
 };

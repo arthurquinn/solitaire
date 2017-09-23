@@ -5,9 +5,10 @@
 Talon::Talon() {
 }
 
-void Talon::push(Card* card) {
+const bool Talon::push(Card* card) {
   card->flip(true);
   pile.push_back(card);
+  return true;
 }
 
 Talon::~Talon() {

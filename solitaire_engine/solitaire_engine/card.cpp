@@ -76,15 +76,15 @@ const color_t Card::get_color() const {
   return color;
 }
 
-bool Card::isOppositeColor(Card* card) const {
+const bool Card::is_opposite_color(Card* card) const {
   return this->color != card->get_color();
 }
 
-bool Card::isRankLower(Card* card) const {
+const bool Card::is_rank_lower(Card* card) const {
   return this->rank == card->get_rank() + 1;
 }
 
-bool Card::isSameSuit(Card* card) const {
+const bool Card::is_same_suit(Card* card) const {
   return this->suit == card->get_suit();
 }
 

@@ -7,7 +7,7 @@ public:
   Talon();
 
   // push a card onto the talon and flip it face up
-  void push(Card* card) override;
+  const bool push(Card* card) override;
 
   ~Talon();
 };

@@ -12,6 +12,10 @@ private:
   FoundationPile foundation[NUM_FOUNDATION_PILES];
   TableauPile tableau[NUM_TABLEAU_PILES];
 
+  const pile_t get_source_cards(PileType& src, unsigned short tcard_index);
+  const bool move_to_foundation(pile_t& src, PileType& dest);
+  const bool move_to_tableau(pile_t& src, PileType& dest);
+
 public:
   Engine();
   ~Engine();
@@ -20,5 +24,5 @@ public:
   void activate_piles(const bool active);
 
   // TODO: Uncomment once Command class is implemented
-  //void move(Command cmd);
+  //void move(Command& cmd);
 };

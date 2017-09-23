@@ -6,9 +6,10 @@ Stock::Stock() {
 
 }
 
-void Stock::push(Card* card) {
+const bool Stock::push(Card* card) {
   card->flip(false);
   pile.push_back(card);
+  return true;
 }
 
 void Stock::shuffle() {
@@ -20,6 +21,7 @@ const bool Stock::draw_three(CardPile& target_pile) {
     return false;
   for (int i = 0; i < 3; i++) {
     Card* card = pile.back();
+    card->flip(true);
     pile.pop_back();
     target_pile.push(card);
   }
