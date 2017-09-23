@@ -10,9 +10,9 @@
 
 int main()
 {
-	Engine engine;
-	engine.init();
-	std::cin.get();
+  Engine engine;
+  engine.init();
+  std::cin.get();
 
     return 0;
 }
