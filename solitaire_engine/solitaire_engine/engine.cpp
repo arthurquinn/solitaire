@@ -13,6 +13,21 @@ void Engine::init() {
 		stock.push(new Card(suit, rank));
 	}
 	stock.shuffle();
+}
+
+void Engine::deal() {
+	for (int i = 0; i < NUM_TABLEAU_PILES; i++) {
+		for (int j = i; j < NUM_TABLEAU_PILES; j++) {
+			stock.draw(tableau[j], i == j);
+		}
+	}
+
+	std::cout << "Deal Result:" << std::endl;
+
+	for (int i = 0; i < NUM_TABLEAU_PILES; i++) {
+		tableau[i].print(i);
+	}
+
 	stock.print();
 }
 
