@@ -1,0 +1,4 @@
+# Pip Install Requirements
+# To install: pip3 install -r requirements.txt --user
+
+tornado ~= 4.5.2
