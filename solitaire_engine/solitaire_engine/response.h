@@ -4,7 +4,7 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 
-static class Response
+class Response
 {
 private:
   Response();

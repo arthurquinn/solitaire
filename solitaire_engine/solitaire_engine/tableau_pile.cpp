@@ -27,7 +27,7 @@ const bool TableauPile::push(Card* card) {
 
 pile_t TableauPile::get_pile(const unsigned short start_index) {
   pile_t sub_vector;
-  unsigned short last_index = pile.size();
+  size_t last_index = pile.size();
 
   if (start_index < last_index) {
     sub_vector = pile_t(&pile[start_index], &pile[last_index]);
