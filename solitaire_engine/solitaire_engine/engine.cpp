@@ -45,7 +45,8 @@ void Engine::activate_piles(const bool active) {
 }
 
 const CommandResult Engine::run(const Command& cmd) {
-
+  CommandResult cr(false, "...");
+  return cr;
   //if (action == DRAW_ONE) {
   //  stock.draw(talon, true);
   //} 

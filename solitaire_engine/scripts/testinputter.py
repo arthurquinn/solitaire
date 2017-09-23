@@ -19,6 +19,7 @@ if __name__ == "__main__":
     cmd = {}
     cmd["cmd"] = "draw"
     cmd["src"] = 0
+    cmd["src_idx"] = 4
     cmd["dest"] = 0
     cmd_str = json.dumps(cmd) + "\n"
     for i in range(10):
