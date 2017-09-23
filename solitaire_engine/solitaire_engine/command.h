@@ -9,16 +9,15 @@ class Command
 private:
   std::string method;
   int src;
-  int src_len;
+  int src_idx;
   int dest;
-
 public:
   Command(const std::string& cmd);
 
   // Access stripped command elemends
   const std::string get_method();
   const int get_src();
-  const int get_src_len();
+  const int get_src_idx();
   const int get_dest();
 
   ~Command();
