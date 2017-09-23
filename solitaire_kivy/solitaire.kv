@@ -1,0 +1,27 @@
+#:kivy 1.0.9
+<Card>:
+    size: 200, 300
+    canvas:
+        Color:
+
+        Rectangle:
+            pos:self.pos
+            size:self.size
+
+<SolitaireGame>:
+    canvas:
+        Color:
+            rgba: 0, 160/255, 0, .5
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        font_size: 70
+        center_x: root.width * 3 / 4
+        top: root.top - 50
+        text: 'hello'
+
+    Card:
+        center_x: root.width * 1/8
+        top: root.top - 40
