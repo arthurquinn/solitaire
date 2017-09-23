@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "command_result.h"
+#include "constants.h"
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
@@ -29,20 +30,20 @@ const std::string CommandResult::stringify() {
   StringBuffer buffer;
   Writer<StringBuffer> writer(buffer);
   writer.StartObject();
-  writer.Key("response");
-  writer.String(status ? "ok" : "error");
-  writer.Key("reason");
+  writer.Key(RESPONSE_KEY);
+  writer.String(status ? ENGINE_RESPONSE_OK : ENGINE_RESPONSE_ERROR);
+  writer.Key(REASON_KEY);
   writer.String(reason);
   if (status) {
-    writer.Key("update");
+    writer.Key(UPDATE_KEY);
     writer.StartArray();
     for (const auto &update : push_map) {
       writer.StartObject();
-      writer.Key("pile");
+      writer.Key(PILE_KEY);
       writer.Int(update.first);
-      writer.Key("pop");
+      writer.Key(POP_KEY);
       writer.Int(pop_map[update.first]);
-      writer.Key("push");
+      writer.Key(PUSH_KEY);
       writer.StartArray();
       for (const char* card_str : update.second) {
         writer.String(card_str);

@@ -14,3 +14,14 @@
 #define NUM_FOUNDATION_PILES 4
 #define NUM_TABLEAU_PILES 7
 
+
+#define RESPONSE_KEY "response"
+#define REASON_KEY "reason"
+#define UPDATE_KEY "update"
+#define PUSH_KEY "push"
+#define POP_KEY "pop"
+#define PILE_KEY "pile"
+
+#define ENGINE_RESPONSE_OK "ok"
+#define ENGINE_RESPONSE_READY "ready"
+#define ENGINE_RESPONSE_ERROR "error"

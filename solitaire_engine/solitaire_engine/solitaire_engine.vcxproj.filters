@@ -48,6 +48,9 @@
     <ClInclude Include="command_result.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="response.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="command_result.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="response.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

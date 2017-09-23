@@ -150,6 +150,7 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="foundation_pile.h" />
+    <ClInclude Include="response.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="stock.h" />
     <ClInclude Include="tableau_pile.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="command_result.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="foundation_pile.cpp" />
+    <ClCompile Include="response.cpp" />
     <ClCompile Include="solitaireengine.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
