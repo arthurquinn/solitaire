@@ -11,7 +11,3 @@
 #define NUM_FOUNDATION_PILES 4
 #define NUM_TABLEAU_PILES 7
 
-#define STOCK 0
-#define TALON 1
-#define FOUNDATION 2
-#define TABLEAU 6
