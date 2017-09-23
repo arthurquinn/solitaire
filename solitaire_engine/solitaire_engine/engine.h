@@ -14,8 +14,11 @@ private:
 
 public:
   Engine();
+  ~Engine();
   void init();
   void deal();
   void activate_piles(const bool active);
-  ~Engine();
+
+  // TODO: Uncomment once Command class is implemented
+  //void move(Command cmd);
 };
