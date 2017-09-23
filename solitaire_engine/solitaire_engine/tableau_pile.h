@@ -4,13 +4,13 @@
 class TableauPile : public CardPile
 {
 public:
-	TableauPile();
+  TableauPile();
 
-	// push a single card onto the tableau pile (it is not flipped when pushed)
-	void push(Card* card) override;
+  // push a single card onto the tableau pile (it is not flipped when pushed)
+  void push(Card* card) override;
 
-	// print a tableau
-	void print(const int tableau_num) const;
+  // print a tableau
+  void print(const int tableau_num) const;
 
-	~TableauPile();
+  ~TableauPile();
 };

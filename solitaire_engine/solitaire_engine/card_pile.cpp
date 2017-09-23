@@ -7,7 +7,7 @@ CardPile::CardPile() {
 }
 
 void CardPile::push(Card* card) {
-	throw new std::exception("CardPile.push() not implemented");
+  throw new std::exception("CardPile.push() not implemented");
 }
 
 void CardPile::set_active(const bool value) {
