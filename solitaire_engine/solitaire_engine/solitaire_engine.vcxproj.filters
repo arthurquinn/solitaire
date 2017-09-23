@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\gameplay">
+      <UniqueIdentifier>{bc4d7c4a-e747-4f86-9d55-2f3e9df53348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\communication">
+      <UniqueIdentifier>{3956bbea-f685-4de3-b35c-2adf0972e1b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gameplay">
+      <UniqueIdentifier>{8c83bd28-4d1a-4044-b8bc-f61ca3a6c2f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\communication">
+      <UniqueIdentifier>{4537b1c4-d209-400c-800f-b8571d002381}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -21,35 +33,35 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="card.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="card.h">
+      <Filter>Header Files\gameplay</Filter>
+    </ClInclude>
     <ClInclude Include="card_pile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="talon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tableau_pile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\gameplay</Filter>
     </ClInclude>
     <ClInclude Include="foundation_pile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="stock.h">
+      <Filter>Header Files\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="tableau_pile.h">
+      <Filter>Header Files\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="talon.h">
+      <Filter>Header Files\gameplay</Filter>
     </ClInclude>
     <ClInclude Include="command_result.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\communication</Filter>
     </ClInclude>
     <ClInclude Include="response.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\communication</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,32 +71,32 @@
     <ClCompile Include="solitaireengine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="card.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="card.cpp">
+      <Filter>Source Files\gameplay</Filter>
+    </ClCompile>
     <ClCompile Include="card_pile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="talon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tableau_pile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\gameplay</Filter>
     </ClCompile>
     <ClCompile Include="foundation_pile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="stock.cpp">
+      <Filter>Source Files\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="tableau_pile.cpp">
+      <Filter>Source Files\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="talon.cpp">
+      <Filter>Source Files\gameplay</Filter>
     </ClCompile>
     <ClCompile Include="command_result.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\communication</Filter>
     </ClCompile>
     <ClCompile Include="response.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\communication</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
