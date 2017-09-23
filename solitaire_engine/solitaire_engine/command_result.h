@@ -1,4 +1,8 @@
 #pragma once
+#include "constants.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
 
 typedef std::map<const int, std::vector<const char*>> push_map_t;
 typedef std::map<const int, int> pop_map_t;
