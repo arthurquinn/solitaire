@@ -63,6 +63,9 @@
     <ClInclude Include="response.h">
       <Filter>Header Files\communication</Filter>
     </ClInclude>
+    <ClInclude Include="command.h">
+      <Filter>Header Files\communication</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -96,6 +99,9 @@
       <Filter>Source Files\communication</Filter>
     </ClCompile>
     <ClCompile Include="response.cpp">
+      <Filter>Source Files\communication</Filter>
+    </ClCompile>
+    <ClCompile Include="command.cpp">
       <Filter>Source Files\communication</Filter>
     </ClCompile>
   </ItemGroup>

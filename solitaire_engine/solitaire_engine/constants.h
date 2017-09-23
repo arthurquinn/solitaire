@@ -26,6 +26,9 @@
 #define ENGINE_RESPONSE_READY "ready"
 #define ENGINE_RESPONSE_ERROR "error"
 
+#define COMMAND_PARSE_ERROR "PARSE_ERROR"
+
 #define MOVE "move"
 #define DRAW_ONE "draw_one"
 #define DRAW_THREE "draw_three"
+

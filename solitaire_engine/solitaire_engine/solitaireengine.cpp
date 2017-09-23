@@ -21,8 +21,9 @@ int main()
   engine.init();
   std::cout << Response::make_response(ENGINE_RESPONSE_READY) << std::endl;
   for (std::string line; std::getline(std::cin, line);) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    std::cout << line << std::endl;
+    Command cmd(line);
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    std::cout << cmd.get_method() << cmd.get_dest() << cmd.get_src() << std::endl;
   }
 
   //std::cout << "Exiting..." << std::endl;
