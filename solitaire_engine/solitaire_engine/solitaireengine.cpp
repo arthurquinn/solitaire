@@ -26,15 +26,20 @@ int main()
   // TODO: Fix error thrown somewhere in here after pressing a key
   for (std::string line; std::getline(std::cin, line);) {
     Command cmd(line);
-    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    Logger::getInstance()->log(LogType::LOG_INFO, "Received: " + line);
+
+    //std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     std::cout << cmd.get_method() << cmd.get_dest() << cmd.get_src() << cmd.get_src_idx() << std::endl;
+
     CommandResult* cr = engine.run(cmd);
     const std::string response = cr->stringify();
-    Logger::getInstance()->log(LogType::LOG_INFO, response);
+    std::cout << response << std::endl;
     delete cr;
+
+    Logger::getInstance()->log(LogType::LOG_INFO, "Written: " + response);
   }
 
-  /*Command cmd12("{\"cmd\": \"draw_one\", \"src\": 1, \"src_idx\": 0, \"dest\": 4}");
+  /*Command cmd12("{\"cmd\": \"draw\", \"src\": 1, \"src_idx\": 0, \"dest\": 4}");
   CommandResult* cr2 = engine.run(cmd12);
   std::cout << cr2->stringify() << std::endl;
   delete(cr2);

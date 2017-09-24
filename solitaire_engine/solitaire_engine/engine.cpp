@@ -49,8 +49,7 @@ void Engine::activate_piles(const bool active) {
 
 CommandResult* Engine::run(Command& cmd) {
   const std::string method = cmd.get_method();
-
-  if (method == DRAW_ONE || method == DRAW_THREE) {
+  if (method == DRAW) {
     return draw(method);
   }
   else if (method == MOVE) {
@@ -67,14 +66,7 @@ CommandResult* Engine::run(Command& cmd) {
 \*/ // =================================
 
 CommandResult* Engine::draw(const std::string method) {
-  std::string response;
-
-  if (method == DRAW_ONE) {
-    response = stock.draw(talon, true);
-  }
-  else if (method == DRAW_THREE) {
-    response = stock.draw_three(talon);
-  }
+  std::string response = stock.draw_three(talon);
 
   return get_command_result(TALON, STOCK, response);
 }

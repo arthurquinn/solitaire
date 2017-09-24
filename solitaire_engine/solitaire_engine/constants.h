@@ -35,8 +35,7 @@
 #define COMMAND_PARSE_ERROR "PARSE_ERROR"
 
 #define MOVE "move"
-#define DRAW_ONE "draw_one"
-#define DRAW_THREE "draw_three"
+#define DRAW "draw"
 
 #define NO_REASON "..."
 #define ERROR_TAG "[Error]"
