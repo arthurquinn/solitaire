@@ -36,8 +36,7 @@ const std::string TableauPile::push(Card* card) {
 
 const std::string TableauPile::push(CardPile* card_pile) {
   std::string response = "";
-  TableauPile* tableau_pile = static_cast<TableauPile*>(card_pile);
-  pile_t cards = get_sub_pile(tableau_pile);
+  pile_t cards = get_cards(card_pile);
   const unsigned int size = cards.size();
 
   if (size == 0) {
@@ -59,24 +58,43 @@ const std::string TableauPile::push(CardPile* card_pile) {
 
   // Pop the cards if no error and flip
   if (response.find(ERROR_TAG) == std::string::npos) {
-    pop(*tableau_pile, cards.size());
+    pop(*card_pile, cards.size());
 
-    if (tableau_pile->pile.size() > 0) {
-      tableau_pile->pile.back()->flip(true);
+    if (card_pile->get_pile_size() > 0) {
+      card_pile->get_pile().back()->flip(true);
     }
   }
 
   return response;
 }
 
-pile_t TableauPile::get_sub_pile(TableauPile* card_pile) {
-  pile_t cards = card_pile->pile;
+pile_t TableauPile::get_cards(CardPile* card_pile) {
+  pile_t src_pile;
 
-  if (card_pile->src_idx > 0) {
+  if (card_pile->get_pile_size() > 0) {
+    if (Talon* talon = dynamic_cast<Talon*>(card_pile)) {
+      src_pile.push_back(static_cast<Talon*>(card_pile)->get_pile().back());
+    }
+    else if (TableauPile* tableau = dynamic_cast<TableauPile*>(card_pile)) {
+      src_pile = tableau->get_sub_pile();
+    }
+    else if (FoundationPile* tableau = dynamic_cast<FoundationPile*>(card_pile)) {
+      src_pile.push_back(static_cast<FoundationPile*>(card_pile)->get_pile().back());
+    }
+  }
+
+  return src_pile;
+}
+
+
+pile_t TableauPile::get_sub_pile() {
+  pile_t cards = this->pile;
+
+  if (this->src_idx > 0) {
     pile_t sub_pile;
     unsigned int size = cards.size();
 
-    for (unsigned int i = card_pile->src_idx; i < size; i++) {
+    for (unsigned int i = this->src_idx; i < size; i++) {
       sub_pile.push_back(cards.at(i));
     }
 
@@ -88,6 +106,10 @@ pile_t TableauPile::get_sub_pile(TableauPile* card_pile) {
 
 const void TableauPile::update_src_idx(const unsigned int idx) {
   src_idx = idx;
+}
+
+const unsigned int TableauPile::get_src_idx() {
+  return src_idx;
 }
 
 void TableauPile::print(const int tableau_num) const {

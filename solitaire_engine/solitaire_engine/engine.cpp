@@ -112,19 +112,16 @@ CommandResult* Engine::move(Command& cmd) {
 CommandResult* Engine::get_command_result(const unsigned int dest_pile_num, const unsigned int src_pile_num, const std::string response) {
   const bool status = response.find(ERROR_TAG) == std::string::npos;
   std::string reason = status ? NO_REASON : response.substr(7);
-  std::vector<const char*> push_items;
-
-  std::cout << response << std::endl;
+  std::vector<std::string> push_items;
 
   // Create command result with fields
   CommandResult* cr = new CommandResult(status, reason);
 
   // Update the fields
   if (status) {
-    // TODO: Fix this function returning garbage
     push_items = Utility::split(response, ',');
 
-    for (const char* card : push_items) {
+    for (std::string card : push_items) {
       cr->update_push(dest_pile_num, card);
     }
 

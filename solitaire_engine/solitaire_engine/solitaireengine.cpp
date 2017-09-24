@@ -14,7 +14,7 @@
 
 int main()
 {
-  Logger::getInstance()->log(LogType::LOG_WARNING, "Test warning.");
+  Logger::getInstance()->log(LogType::LOG_INFO, "Logging start.");
 
   //std::cout << "Running..." << std::endl;
 
@@ -24,23 +24,28 @@ int main()
   std::cout << Response::make_response(ENGINE_RESPONSE_READY) << std::endl;
 
   // TODO: Fix error thrown somewhere in here after pressing a key
-  /*for (std::string line; std::getline(std::cin, line);) {
+  for (std::string line; std::getline(std::cin, line);) {
     Command cmd(line);
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     std::cout << cmd.get_method() << cmd.get_dest() << cmd.get_src() << cmd.get_src_idx() << std::endl;
     CommandResult* cr = engine.run(cmd);
-    std::cout << cr->stringify() << std::endl;
+    const std::string response = cr->stringify();
+    Logger::getInstance()->log(LogType::LOG_INFO, response);
     delete cr;
-  }*/
+  }
 
-  Command cmd1("{\"cmd\": \"move\", \"src\": 1, \"src_idx\": 0, \"dest\": 7}");
+  /*Command cmd12("{\"cmd\": \"draw_one\", \"src\": 1, \"src_idx\": 0, \"dest\": 4}");
+  CommandResult* cr2 = engine.run(cmd12);
+  std::cout << cr2->stringify() << std::endl;
+  delete(cr2);
+
+  Command cmd1("{\"cmd\": \"move\", \"src\": 3, \"src_idx\": 0, \"dest\": 6}");
   CommandResult* cr = engine.run(cmd1);
   std::cout << cr->stringify() << std::endl;
-  delete(cr);
-
+  delete(cr);*/
 
   //std::cout << "Exiting..." << std::endl;
-  std::cin.get();
+  //std::cin.get();
   //std::cout << std::endl;
 
   //CommandResult cr(true, "bad stuff");

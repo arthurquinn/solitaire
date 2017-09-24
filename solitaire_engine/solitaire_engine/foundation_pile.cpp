@@ -37,7 +37,7 @@ const std::string FoundationPile::push(Card* card) {
 
 const std::string FoundationPile::push(CardPile* card_pile) {
   std::string response = NO_REASON;
-  pile_t src_pile = static_cast<FoundationPile*>(card_pile)->pile;
+  pile_t src_pile = get_cards(card_pile);
   unsigned int size = src_pile.size();
 
   if (size == 1) {
@@ -56,4 +56,22 @@ const std::string FoundationPile::push(CardPile* card_pile) {
   }
 
   return response;
+}
+
+pile_t FoundationPile::get_cards(CardPile* card_pile) {
+  pile_t src_pile;
+
+  if (card_pile->get_pile_size() > 0) {
+    if (Talon* talon = dynamic_cast<Talon*>(card_pile)) {
+      src_pile.push_back(static_cast<Talon*>(card_pile)->get_pile().back());
+    }
+    else if (TableauPile* tableau = dynamic_cast<TableauPile*>(card_pile)) {
+      src_pile = tableau->get_sub_pile();
+    }
+    else if (FoundationPile* tableau = dynamic_cast<FoundationPile*>(card_pile)) {
+      src_pile.push_back(static_cast<FoundationPile*>(card_pile)->get_pile().back());
+    }
+  }
+
+  return src_pile;
 }

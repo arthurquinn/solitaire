@@ -25,7 +25,11 @@ const std::vector<Card*> CardPile::pop(CardPile& card_pile, const unsigned int a
   return cards;
 }
 
-const unsigned int CardPile::pile_size() {
+const pile_t CardPile::get_pile() {
+  return pile;
+}
+
+const unsigned int CardPile::get_pile_size() {
   return pile.size();
 }
 

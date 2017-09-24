@@ -4,15 +4,15 @@
 Utility::Utility() {}
 Utility::~Utility() {}
 
-std::vector<const char*> Utility::split(const std::string str, const char delimeter) {
-  std::vector<const char*> result;
+std::vector<std::string> Utility::split(const std::string str, const char delimeter) {
+  std::vector<std::string> result;
 
   if (str != NO_REASON) {
     std::istringstream ss(str);
     std::string token;
 
     while (std::getline(ss, token, delimeter)) {
-      result.push_back(token.c_str());
+      result.push_back(token);
     }
   }
   else {

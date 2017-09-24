@@ -40,7 +40,7 @@ const std::string Stock::draw_three(CardPile& target_pile) {
       }
     }
   }
-  else if(size == 0 && target_pile.pile_size() > 0) {
+  else if(size == 0 && target_pile.get_pile_size() > 0) {
     response = reset(target_pile);
   }
   else {
@@ -61,7 +61,7 @@ const std::string Stock::draw(CardPile& target_pile, const bool face_up) {
     target_pile.push(card);
     response = std::string(card->as_str());
   }
-  else if (size == 0 && target_pile.pile_size() > 0) {
+  else if (size == 0 && target_pile.get_pile_size() > 0) {
     response = reset(target_pile);
   }
   else {
@@ -74,7 +74,7 @@ const std::string Stock::draw(CardPile& target_pile, const bool face_up) {
 const std::string Stock::reset(CardPile& target_pile) {
   std::string response = "";
   Talon& talon = static_cast<Talon&>(target_pile);
-  std::vector<Card*> cards = pop(talon, talon.pile_size());
+  std::vector<Card*> cards = pop(talon, talon.get_pile_size());
   const unsigned int size = cards.size();
 
   for (unsigned int i = 0; i < size; i++) {

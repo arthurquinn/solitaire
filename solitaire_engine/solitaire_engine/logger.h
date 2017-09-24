@@ -17,7 +17,7 @@ public:
   explicit Logger(const char *file_name = "solitaire");
   ~Logger();
 
-  const void log(const LogType type, const char *text);
+  const void log(const LogType type, std::string text);
   const void close();
 
   // Make it non-copyable

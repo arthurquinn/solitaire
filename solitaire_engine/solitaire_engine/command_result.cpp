@@ -14,7 +14,7 @@ using namespace rapidjson;
 
 CommandResult::CommandResult(const bool status, const std::string reason) : status(status), reason(reason) { }
 
-void CommandResult::update_push(const int pile, const char* card_str) {
+void CommandResult::update_push(const int pile, const std::string card_str) {
   push_map[pile].push_back(card_str);
 }
 
@@ -41,8 +41,8 @@ const std::string CommandResult::stringify() {
       writer.Int(pop_map[update.first]);
       writer.Key(PUSH_KEY);
       writer.StartArray();
-      for (const char* card_str : update.second) {
-        writer.String(card_str);
+      for (const std::string card_str : update.second) {
+        writer.String(card_str.c_str());
       }
       writer.EndArray();
       writer.EndObject();
