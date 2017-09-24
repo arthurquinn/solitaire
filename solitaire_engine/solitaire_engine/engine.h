@@ -5,6 +5,7 @@
 #include "tableau_pile.h"
 #include "command_result.h"
 #include "command.h"
+#include "utility.h"
 
 class Engine
 {
@@ -14,9 +15,11 @@ private:
   FoundationPile foundation[NUM_FOUNDATION_PILES];
   TableauPile tableau[NUM_TABLEAU_PILES];
 
-  const pile_t get_source_cards(PileType& src, unsigned short tcard_index);
-  const bool move_to_foundation(pile_t& src, PileType& dest);
-  const bool move_to_tableau(pile_t& src, PileType& dest);
+  CommandResult* draw(const std::string method);
+  CommandResult* move(Command& cmd);
+  CardPile* get_src_pile(const int src, const int src_idx);
+  CardPile* get_dest_pile(const int dest);
+  CommandResult* get_command_result(const unsigned int dest_pile_num, const unsigned int src_pile_num, const std::string retval);
 
 public:
   Engine();
@@ -24,5 +27,5 @@ public:
   void init();
   void deal();
   void activate_piles(const bool active);
-  const CommandResult run(const Command& cmd);
+  CommandResult* run(Command& cmd);
 };

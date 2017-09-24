@@ -13,7 +13,13 @@
 
 #define NUM_FOUNDATION_PILES 4
 #define NUM_TABLEAU_PILES 7
-#define LAST_PILE_INDEX 13
+
+#define STOCK 0
+#define TALON 1
+#define FOUNDATION 2
+#define FOUNDATION_LAST 5
+#define TABLEAU 6
+#define TABLEAU_LAST 12
 
 #define RESPONSE_KEY "response"
 #define REASON_KEY "reason"
@@ -32,3 +38,5 @@
 #define DRAW_ONE "draw_one"
 #define DRAW_THREE "draw_three"
 
+#define NO_REASON "..."
+#define ERROR_TAG "[Error]"

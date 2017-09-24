@@ -3,17 +3,25 @@
 
 class TableauPile : public CardPile
 {
-public:
-  TableauPile();
-
-  // push a single card onto the tableau pile (it is not flipped when pushed)
-  const bool push(Card* card) override;
+private:
+  unsigned int src_idx;
 
   // Get pile starting from an index number
-  pile_t get_pile(const unsigned short index);
+  pile_t get_sub_pile(TableauPile* card_pile);
+
+public:
+  TableauPile();
+  ~TableauPile();
+
+  // push a single card onto the tableau pile (it is not flipped when pushed)
+  const std::string push(Card* card) override;
+
+  // push a card pile (not flipped)
+  const std::string push(CardPile* card_pile) override;
+
+  // Update source index for tableau
+  const void update_src_idx(const unsigned int idx);
 
   // print a tableau
   void print(const int tableau_num) const;
-
-  ~TableauPile();
 };

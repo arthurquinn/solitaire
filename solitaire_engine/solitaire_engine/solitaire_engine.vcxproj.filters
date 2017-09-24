@@ -25,6 +25,12 @@
     <Filter Include="Source Files\communication">
       <UniqueIdentifier>{4537b1c4-d209-400c-800f-b8571d002381}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\utilities">
+      <UniqueIdentifier>{65599e41-219b-4ddd-9b81-4ace3fcd1e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utilities">
+      <UniqueIdentifier>{83ac72d1-9ac1-4bbb-ab47-539899fb2501}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -66,6 +72,12 @@
     <ClInclude Include="command.h">
       <Filter>Header Files\communication</Filter>
     </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>Header Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="logger.h">
+      <Filter>Header Files\utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -103,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="command.cpp">
       <Filter>Source Files\communication</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>Source Files\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="logger.cpp">
+      <Filter>Source Files\utilities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

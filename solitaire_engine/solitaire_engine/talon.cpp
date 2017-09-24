@@ -5,10 +5,14 @@
 Talon::Talon() {
 }
 
-const bool Talon::push(Card* card) {
+const std::string Talon::push(Card* card) {
   card->flip(true);
   pile.push_back(card);
-  return true;
+  return NO_REASON;
+}
+
+const std::string Talon::push(CardPile* card_pile) {
+  return ERROR_TAG + std::string("Cannot push to the talon pile.");
 }
 
 Talon::~Talon() {

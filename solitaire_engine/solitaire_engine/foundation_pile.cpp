@@ -6,8 +6,12 @@ FoundationPile::FoundationPile() {
 
 }
 
-const bool FoundationPile::push(Card* card) {
-  bool is_valid = false;
+FoundationPile::~FoundationPile() {
+
+}
+
+const std::string FoundationPile::push(Card* card) {
+  std::string response = NO_REASON;
 
   if (is_active()) {
     Card* pile_card = (pile.size() > 0) ? pile.back() : NULL;
@@ -16,16 +20,40 @@ const bool FoundationPile::push(Card* card) {
 
     if (is_empty_and_ace || is_valid_move) {
       pile.push_back(card);
-      is_valid = true;
+      response = std::string(card->as_str());
+    }
+    else if (pile_card == NULL) {
+      response = ERROR_TAG + std::string("You can only bring an Ace to an empty position.");
+    }
+    else {
+      response = ERROR_TAG + std::string(card->as_str()) + " is not the same suit, is not the same color, or rank is lower.";
     }
   } else {
     pile.push_back(card);
-    is_valid = true;
   }
 
-  return is_valid;
+  return response;
 }
 
-FoundationPile::~FoundationPile() {
+const std::string FoundationPile::push(CardPile* card_pile) {
+  std::string response = NO_REASON;
+  pile_t src_pile = static_cast<FoundationPile*>(card_pile)->pile;
+  unsigned int size = src_pile.size();
 
+  if (size == 1) {
+    response = push(src_pile.back());
+  }
+  else if(size > 1) {
+    response = ERROR_TAG + std::string("Cannot add a group of cards to a foundation pile.");
+  }
+  else {
+    response = ERROR_TAG + std::string("No cards selected.");
+  }
+
+  // Pop the card if no error
+  if (response.find(ERROR_TAG) == std::string::npos) {
+    pop(*card_pile, 1);
+  }
+
+  return response;
 }

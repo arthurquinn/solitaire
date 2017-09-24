@@ -2,7 +2,6 @@
 #include "card.h"
 
 typedef std::vector<Card*> pile_t;
-enum class PileType { stock = 0, talon = 1, foundation = 3, tableau = 7 };
 
 class CardPile
 {
@@ -15,8 +14,12 @@ protected:
   pile_t pile;
 
 public:
-  virtual const bool push(Card* card);
+  virtual const std::string push(Card* card);
+  virtual const std::string push(CardPile* card_pile);
+
+  const std::vector<Card*> pop(CardPile& card_pile, const unsigned int amount);
+  const unsigned int pile_size();
+
   const bool is_active();
   void set_active(const bool value);
-  pile_t get_pile();
 };

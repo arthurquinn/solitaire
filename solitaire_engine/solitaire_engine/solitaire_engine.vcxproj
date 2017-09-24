@@ -151,12 +151,14 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="foundation_pile.h" />
+    <ClInclude Include="logger.h" />
     <ClInclude Include="response.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="stock.h" />
     <ClInclude Include="tableau_pile.h" />
     <ClInclude Include="talon.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="card.cpp" />
@@ -165,6 +167,7 @@
     <ClCompile Include="command_result.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="foundation_pile.cpp" />
+    <ClCompile Include="logger.cpp" />
     <ClCompile Include="response.cpp" />
     <ClCompile Include="solitaireengine.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -176,6 +179,7 @@
     <ClCompile Include="stock.cpp" />
     <ClCompile Include="tableau_pile.cpp" />
     <ClCompile Include="talon.cpp" />
+    <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

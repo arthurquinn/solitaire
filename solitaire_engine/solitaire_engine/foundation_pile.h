@@ -7,5 +7,6 @@ public:
   FoundationPile();
   ~FoundationPile();
 
-  const bool push(Card* card) override;
+  const std::string push(Card* card) override;
+  const std::string push(CardPile* card_pile) override;
 };

@@ -7,8 +7,10 @@ public:
   Talon();
 
   // push a card onto the talon and flip it face up
-  const bool push(Card* card) override;
+  const std::string push(Card* card) override;
+
+  // push a card pile to the talon pile
+  const std::string push(CardPile* card_pile) override;
 
   ~Talon();
 };
-

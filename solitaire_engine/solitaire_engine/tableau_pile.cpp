@@ -2,11 +2,15 @@
 #include "tableau_pile.h"
 
 TableauPile::TableauPile() {
+  src_idx = 0;
+}
+
+TableauPile::~TableauPile() {
 
 }
 
-const bool TableauPile::push(Card* card) {
-  bool is_valid = false;
+const std::string TableauPile::push(Card* card) {
+  std::string response = NO_REASON;
 
   if (is_active()) {
     Card* pile_card = (pile.size() > 0) ? pile.back() : NULL;
@@ -15,33 +19,79 @@ const bool TableauPile::push(Card* card) {
 
     if (isEmptyAndKing || isValidMove) {
       pile.push_back(card);
-      is_valid = true;
+      response = std::string(card->as_str());
+    }
+    else if (pile_card == NULL) {
+      response = ERROR_TAG + std::string("You can only place a King in an empty position.");
+    }
+    else {
+      response = ERROR_TAG + std::string(card->as_str()) + " is not the opposite color or rank is higher.";
     }
    } else {
     pile.push_back(card);
-    is_valid = true;
   }
 
-  return is_valid;
+  return response;
 }
 
-pile_t TableauPile::get_pile(const unsigned short start_index) {
-  pile_t sub_vector;
-  size_t last_index = pile.size();
+const std::string TableauPile::push(CardPile* card_pile) {
+  std::string response = "";
+  TableauPile* tableau_pile = static_cast<TableauPile*>(card_pile);
+  pile_t cards = get_sub_pile(tableau_pile);
+  const unsigned int size = cards.size();
 
-  if (start_index < last_index) {
-    sub_vector = pile_t(&pile[start_index], &pile[last_index]);
+  if (size == 0) {
+    response = ERROR_TAG + std::string("No cards selected.");
   }
 
-  return sub_vector;
+  // Push the cards
+  for (unsigned int i = 0; i < size; i++) {
+    response += push(cards.at(i));
+
+    if (response.find(ERROR_TAG) != std::string::npos) {
+      break;
+    }
+
+    if (i != size - 1) {
+      response += ",";
+    }
+  }
+
+  // Pop the cards if no error and flip
+  if (response.find(ERROR_TAG) == std::string::npos) {
+    pop(*tableau_pile, cards.size());
+
+    if (tableau_pile->pile.size() > 0) {
+      tableau_pile->pile.back()->flip(true);
+    }
+  }
+
+  return response;
+}
+
+pile_t TableauPile::get_sub_pile(TableauPile* card_pile) {
+  pile_t cards = card_pile->pile;
+
+  if (card_pile->src_idx > 0) {
+    pile_t sub_pile;
+    unsigned int size = cards.size();
+
+    for (unsigned int i = card_pile->src_idx; i < size; i++) {
+      sub_pile.push_back(cards.at(i));
+    }
+
+    return sub_pile;
+  }
+
+  return cards;
+}
+
+const void TableauPile::update_src_idx(const unsigned int idx) {
+  src_idx = idx;
 }
 
 void TableauPile::print(const int tableau_num) const {
   for (Card* card : pile) {
     std::cout << "Tableau" << tableau_num << ": " << *card << ", FaceUp: " << card->is_visible() << std::endl;
   }
-}
-
-TableauPile::~TableauPile() {
-
 }

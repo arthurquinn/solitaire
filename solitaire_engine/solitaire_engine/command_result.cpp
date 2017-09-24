@@ -12,7 +12,7 @@ using namespace rapidjson;
 
 // COMMAND RESULT
 
-CommandResult::CommandResult(const bool status, const char* reason) : status(status), reason(reason) { }
+CommandResult::CommandResult(const bool status, const std::string reason) : status(status), reason(reason) { }
 
 void CommandResult::update_push(const int pile, const char* card_str) {
   push_map[pile].push_back(card_str);
@@ -29,7 +29,7 @@ const std::string CommandResult::stringify() {
   writer.Key(RESPONSE_KEY);
   writer.String(status ? ENGINE_RESPONSE_OK : ENGINE_RESPONSE_ERROR);
   writer.Key(REASON_KEY);
-  writer.String(reason);
+  writer.String(reason.c_str());
   if (status) {
     writer.Key(UPDATE_KEY);
     writer.StartArray();
