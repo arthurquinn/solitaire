@@ -54,5 +54,7 @@ int main()
   //const std::string str = cr.stringify();
   //std::cout << str << std::endl;
   //std::cin.get();
+
+  Logger::getInstance()->close();
   return 0;
 }

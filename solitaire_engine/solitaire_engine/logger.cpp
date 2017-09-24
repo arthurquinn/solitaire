@@ -22,8 +22,6 @@ Logger::~Logger() {
 
     log_file.close();
   }
-
-  delete instance;
 }
 
 const void Logger::log(const LogType type, const char *text) {
@@ -44,6 +42,10 @@ const void Logger::log(const LogType type, const char *text) {
       log_file << datetime << " [INFO]: " << text << std::endl;
       break;
   }
+}
+
+const void Logger::close() {
+  delete instance;
 }
 
 Logger* Logger::getInstance() {

@@ -18,6 +18,7 @@ public:
   ~Logger();
 
   const void log(const LogType type, const char *text);
+  const void close();
 
   // Make it non-copyable
   Logger(const Logger& logger) = delete;
