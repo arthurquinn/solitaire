@@ -5,12 +5,13 @@ Logger Logger::instance;
 
 Logger::Logger(const char *file_name): num_errors(0U), num_warnings(0U) {
   #ifdef _DEBUG
-    std::string datetime = Utility::get_datetime("%m%d%Y%H%M%S");
-    const std::string full_path = "./Logs/" + std::string(file_name) + std::string("_") + datetime + ".log";
+    std::string datetime_name = Utility::get_datetime("%m%d%Y%H%M%S", false);
+    std::string datetime_text = Utility::get_datetime("%m/%d/%Y %H:%M:%S", true);
+    const std::string full_path = "./Logs/" + std::string(file_name) + std::string("_") + datetime_name + ".log";
     log_file.open(full_path);
 
     if (log_file.is_open()) {
-      log_file << "Solitaire Engine " << datetime << std::endl << std::endl;
+      log_file << "Solitaire Engine " << datetime_text << std::endl << std::endl;
     }
   #endif
 }
@@ -28,7 +29,7 @@ Logger::~Logger() {
 
 const void Logger::log(const LogType type, std::string text) {
   if (log_file.is_open()) {
-    std::string datetime = Utility::get_datetime("%m/%d/%Y %H:%M:%S");
+    std::string datetime = Utility::get_datetime("%H:%M:%S", true);
 
     switch (type) {
     case LogType::LOG_ERROR:

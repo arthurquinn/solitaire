@@ -1,13 +1,8 @@
 #include "stdafx.h"
 #include "engine.h"
 
-Engine::Engine() {
-
-}
-
-Engine::~Engine() {
-
-}
+Engine::Engine() {}
+Engine::~Engine() {}
 
 void Engine::init() {
   for (int i = 0; i < NUM_CARDS; i++) {
@@ -40,6 +35,7 @@ void Engine::activate_piles(const bool active) {
 
 CommandResult Engine::run(Command& cmd) {
   const std::string method = cmd.get_method();
+
   if (method == DRAW) {
     return draw(method);
   }
@@ -47,7 +43,7 @@ CommandResult Engine::run(Command& cmd) {
     return move(cmd);      
   }
 
-  return get_command_result(ERROR_TAG + std::string("Invalid command"));
+  return CommandResult(false, ERROR_TAG + std::string("Invalid command"));
 }
 
 const bool Engine::check() const {
@@ -76,11 +72,14 @@ CommandResult Engine::move(Command& cmd) {
     const int src_idx = cmd.get_src_idx();
     CardPile* dest_pile = get_dest_pile(dest_pile_num);
     CardPile* src_pile = get_src_pile(src_pile_num, src_idx);
-    pile_t src_cards = get_cards(src_pile);
 
     if (src_pile != NULL && dest_pile != NULL) {
+      pile_t src_cards = get_cards(src_pile);
       dest_response = dest_pile->push(src_cards);
-      src_response = src_pile->pop(src_cards.size());
+
+      if (dest_response.find(ERROR_TAG) == std::string::npos) {
+        src_response = src_pile->pop(src_cards.size());
+      }
     }
     else {
       dest_response += "Invalid source or destination.";
@@ -98,10 +97,6 @@ CommandResult Engine::move(Command& cmd) {
 |*|     Helper functions
 |*|
 \*/ // =================================
-
-CommandResult Engine::get_command_result(const std::string reason) {
-  return CommandResult(false, reason);
-}
 
 CommandResult Engine::get_command_result(const unsigned int dest_pile_num, const std::string dest_response, const unsigned int src_pile_num, const std::string src_response) {
   std::vector<std::string> dest_items;

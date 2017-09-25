@@ -14,12 +14,9 @@ const std::string CardPile::push(pile_t cards) {
 }
 
 const std::string CardPile::pop(const unsigned int amount) {
-  std::vector<Card*> cards;
   std::string response = EMPTY_LIST;
 
   for (unsigned int i = 0; i < amount; i++) {
-    Card* card = this->pile.back();
-    cards.push_back(card);
     this->pile.pop_back();
   }
 

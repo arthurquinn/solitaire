@@ -100,7 +100,7 @@ const std::vector<std::string> Stock::reset(CardPile& target_pile) {
     card->flip(false);
     pile.push_back(card);
 
-    dest_response += std::string(card->as_str());
+    dest_response += "xx";
     if (i != size - 1) {
       dest_response += ",";
     }
