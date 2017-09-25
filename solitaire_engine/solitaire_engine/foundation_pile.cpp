@@ -58,6 +58,10 @@ const std::string FoundationPile::push(CardPile* card_pile) {
   return response;
 }
 
+const int FoundationPile::count() const {
+  return pile.size();
+}
+
 pile_t FoundationPile::get_cards(CardPile* card_pile) {
   pile_t src_pile;
 

@@ -12,4 +12,5 @@ public:
   const std::string push(Card* card) override;
   const std::string push(CardPile* card_pile) override;
   pile_t get_cards(CardPile* card_pile);
+  const int count() const;
 };

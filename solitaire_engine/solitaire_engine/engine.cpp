@@ -21,19 +21,11 @@ void Engine::init() {
 
 void Engine::deal() {
   activate_piles(false);
-
   for (int i = 0; i < NUM_TABLEAU_PILES; i++) {
     for (int j = i; j < NUM_TABLEAU_PILES; j++) {
       stock.draw(tableau[j], i == j);
     }
   }
-
-  /*std::cout << "Deal Result:" << std::endl;
-  for (int i = 0; i < NUM_TABLEAU_PILES; i++) {
-    tableau[i].print(i);
-  }
-  stock.print();*/
-
   activate_piles(true);
 }
 
@@ -57,6 +49,10 @@ CommandResult Engine::run(Command& cmd) {
   }
 
   return get_command_result(NULL, NULL, ERROR_TAG + std::string("Invalid command"));
+}
+
+const bool Engine::check() const {
+  return _is_win;
 }
 
 /*\ // =================================

@@ -7,6 +7,12 @@
 #include "command.h"
 #include "utility.h"
 
+#define _foundation_full(x) foundation[x].count() == 13
+#define _is_win _foundation_full(SPADES) && \
+                _foundation_full(CLUBS) && \
+                _foundation_full(HEARTS) && \
+                _foundation_full(DIAMONDS)
+
 class Engine
 {
 private:
@@ -28,4 +34,5 @@ public:
   void deal();
   void activate_piles(const bool active);
   CommandResult run(Command& cmd);
+  const bool check() const;
 };
