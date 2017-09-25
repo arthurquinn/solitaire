@@ -14,7 +14,7 @@
 
 int main()
 {
-  Logger::getInstance()->log(LogType::LOG_INFO, "Logging start.");
+  Logger::getInstance().log(LogType::LOG_INFO, "Logging start.");
 
   //std::cout << "Running..." << std::endl;
 
@@ -26,7 +26,7 @@ int main()
   // TODO: Fix error thrown somewhere in here after pressing a key
   for (std::string line; std::getline(std::cin, line);) {
     Command cmd(line);
-    Logger::getInstance()->log(LogType::LOG_INFO, "Received: " + line);
+    Logger::getInstance().log(LogType::LOG_INFO, "Received: " + line);
 
     //std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     std::cout << cmd.get_method() << cmd.get_dest() << cmd.get_src() << cmd.get_src_idx() << std::endl;
@@ -35,7 +35,7 @@ int main()
     const std::string response = cr.stringify();
     std::cout << response << std::endl;
 
-    Logger::getInstance()->log(LogType::LOG_INFO, "Written: " + response);
+    Logger::getInstance().log(LogType::LOG_INFO, "Written: " + response);
   }
 
   /*Command cmd12("{\"cmd\": \"draw\", \"src\": 1, \"src_idx\": 0, \"dest\": 4}");
@@ -64,6 +64,5 @@ int main()
   //std::cout << str << std::endl;
   //std::cin.get();
 
-  Logger::getInstance()->close();
   return 0;
 }

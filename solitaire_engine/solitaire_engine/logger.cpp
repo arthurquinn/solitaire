@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "logger.h"
 
-Logger* Logger::instance = 0;
+Logger Logger::instance;
 
 Logger::Logger(const char *file_name): num_errors(0U), num_warnings(0U) {
   #ifdef _DEBUG
@@ -49,13 +49,13 @@ const void Logger::log(const LogType type, std::string text) {
 }
 
 const void Logger::close() {
-  delete instance;
+
 }
 
-Logger* Logger::getInstance() {
-  if (!instance) {
-    instance = new Logger();
-  }
+Logger& Logger::getInstance() {
+  //if (!instance) {
+  //  instance = new Logger();
+  //}
 
   return instance;
 }

@@ -6,7 +6,7 @@ enum class LogType { LOG_ERROR, LOG_WARNING, LOG_INFO };
 class Logger
 {
 private:
-  static Logger* Logger::instance;
+  static Logger Logger::instance;
 
   std::ofstream log_file;
 
@@ -25,5 +25,5 @@ public:
   Logger &operator= (const Logger& logger) = delete;
 
   // Singleton
-  static Logger* getInstance();
+  static Logger& getInstance();
 };
