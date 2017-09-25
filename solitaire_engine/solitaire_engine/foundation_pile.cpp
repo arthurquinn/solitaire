@@ -16,7 +16,7 @@ const std::string FoundationPile::push(Card* card) {
   if (is_active()) {
     Card* pile_card = (pile.size() > 0) ? pile.back() : NULL;
     bool is_empty_and_ace = pile_card == NULL && card->get_rank() == 0;
-    bool is_valid_move = pile_card != NULL && pile_card->is_same_suit(card) && !pile_card->is_opposite_color(card) && !pile_card->is_rank_lower(card);
+    bool is_valid_move = pile_card != NULL && pile_card->is_same_suit(*card) && !pile_card->is_opposite_color(*card) && !pile_card->is_rank_lower(*card);
 
     if (is_empty_and_ace || is_valid_move) {
       pile.push_back(card);

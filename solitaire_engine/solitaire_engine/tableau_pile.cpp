@@ -15,7 +15,7 @@ const std::string TableauPile::push(Card* card) {
   if (is_active()) {
     Card* pile_card = (pile.size() > 0) ? pile.back() : NULL;
     bool isEmptyAndKing = pile_card == NULL && card->get_rank() == 12;
-    bool isValidMove = pile_card != NULL && pile_card->is_opposite_color(card) && pile_card->is_rank_lower(card);
+    bool isValidMove = pile_card != NULL && pile_card->is_opposite_color(*card) && pile_card->is_rank_lower(*card);
 
     if (isEmptyAndKing || isValidMove) {
       pile.push_back(card);
