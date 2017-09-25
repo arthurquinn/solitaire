@@ -19,6 +19,7 @@ int main()
   engine.init();
   engine.deal();
   std::cout << Response::make_response(ENGINE_RESPONSE_READY) << std::endl;
+
   for (std::string line; std::getline(std::cin, line);) {
     Command cmd(line);
     _LOG_INFO("Received: " + line);
@@ -28,5 +29,6 @@ int main()
     std::cout << response << std::endl;
     _LOG_INFO("Written: " + response);
   }
+
   return 0;
 }

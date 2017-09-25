@@ -38,4 +38,5 @@
 #define DRAW "draw"
 
 #define NO_REASON "..."
+#define EMPTY_LIST ""
 #define ERROR_TAG "[Error]"

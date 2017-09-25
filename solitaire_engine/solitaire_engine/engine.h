@@ -25,7 +25,9 @@ private:
   CommandResult move(Command& cmd);
   CardPile* get_src_pile(const int src, const int src_idx);
   CardPile* get_dest_pile(const int dest);
-  CommandResult get_command_result(const unsigned int dest_pile_num, const unsigned int src_pile_num, const std::string retval);
+  CommandResult get_command_result(const std::string reason);
+  CommandResult get_command_result(const unsigned int dest_pile_num, const std::string dest_response, const unsigned int src_pile_num, const std::string src_response);
+  pile_t get_cards(CardPile* card_pile);
 
 public:
   Engine();

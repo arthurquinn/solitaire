@@ -20,4 +20,3 @@ public:
   const std::string stringify();
   ~CommandResult();
 };
-

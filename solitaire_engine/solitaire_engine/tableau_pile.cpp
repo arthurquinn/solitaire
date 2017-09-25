@@ -34,9 +34,8 @@ const std::string TableauPile::push(Card* card) {
   return response;
 }
 
-const std::string TableauPile::push(CardPile* card_pile) {
+const std::string TableauPile::push(pile_t cards) {
   std::string response = "";
-  pile_t cards = get_cards(card_pile);
   const unsigned int size = cards.size();
 
   if (size == 0) {
@@ -56,36 +55,27 @@ const std::string TableauPile::push(CardPile* card_pile) {
     }
   }
 
-  // Pop the cards if no error and flip
-  if (response.find(ERROR_TAG) == std::string::npos) {
-    pop(*card_pile, cards.size());
+  return response;
+}
 
-    if (card_pile->get_pile_size() > 0) {
-      card_pile->get_pile().back()->flip(true);
-    }
+const std::string TableauPile::pop(const unsigned int amount) {
+  std::vector<Card*> cards;
+  std::string response = EMPTY_LIST;
+
+  for (unsigned int i = 0; i < amount; i++) {
+    Card* card = this->pile.back();
+    cards.push_back(card);
+    this->pile.pop_back();
+  }
+
+  if (this->pile.size() > 0) {
+    Card* card = this->pile.back();
+    card->flip(true);
+    response = std::string(card->as_str());
   }
 
   return response;
 }
-
-pile_t TableauPile::get_cards(CardPile* card_pile) {
-  pile_t src_pile;
-
-  if (card_pile->get_pile_size() > 0) {
-    if (Talon* talon = dynamic_cast<Talon*>(card_pile)) {
-      src_pile.push_back(static_cast<Talon*>(card_pile)->get_pile().back());
-    }
-    else if (TableauPile* tableau = dynamic_cast<TableauPile*>(card_pile)) {
-      src_pile = tableau->get_sub_pile();
-    }
-    else if (FoundationPile* tableau = dynamic_cast<FoundationPile*>(card_pile)) {
-      src_pile.push_back(static_cast<FoundationPile*>(card_pile)->get_pile().back());
-    }
-  }
-
-  return src_pile;
-}
-
 
 pile_t TableauPile::get_sub_pile() {
   pile_t cards = this->pile;

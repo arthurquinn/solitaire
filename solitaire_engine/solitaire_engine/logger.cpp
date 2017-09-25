@@ -48,14 +48,6 @@ const void Logger::log(const LogType type, std::string text) {
   }
 }
 
-const void Logger::close() {
-
-}
-
 Logger& Logger::getInstance() {
-  //if (!instance) {
-  //  instance = new Logger();
-  //}
-
   return instance;
 }

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "foundation_pile.h"
 
-
 FoundationPile::FoundationPile() {
 
 }
@@ -35,13 +34,12 @@ const std::string FoundationPile::push(Card* card) {
   return response;
 }
 
-const std::string FoundationPile::push(CardPile* card_pile) {
+const std::string FoundationPile::push(pile_t cards) {
   std::string response = NO_REASON;
-  pile_t src_pile = get_cards(card_pile);
-  unsigned int size = src_pile.size();
+  unsigned int size = cards.size();
 
   if (size == 1) {
-    response = push(src_pile.back());
+    response = push(cards.back());
   }
   else if(size > 1) {
     response = ERROR_TAG + std::string("Cannot add a group of cards to a foundation pile.");
@@ -50,32 +48,9 @@ const std::string FoundationPile::push(CardPile* card_pile) {
     response = ERROR_TAG + std::string("No cards selected.");
   }
 
-  // Pop the card if no error
-  if (response.find(ERROR_TAG) == std::string::npos) {
-    pop(*card_pile, 1);
-  }
-
   return response;
 }
 
 const int FoundationPile::count() const {
   return pile.size();
-}
-
-pile_t FoundationPile::get_cards(CardPile* card_pile) {
-  pile_t src_pile;
-
-  if (card_pile->get_pile_size() > 0) {
-    if (Talon* talon = dynamic_cast<Talon*>(card_pile)) {
-      src_pile.push_back(static_cast<Talon*>(card_pile)->get_pile().back());
-    }
-    else if (TableauPile* tableau = dynamic_cast<TableauPile*>(card_pile)) {
-      src_pile = tableau->get_sub_pile();
-    }
-    else if (FoundationPile* tableau = dynamic_cast<FoundationPile*>(card_pile)) {
-      src_pile.push_back(static_cast<FoundationPile*>(card_pile)->get_pile().back());
-    }
-  }
-
-  return src_pile;
 }

@@ -1,7 +1,5 @@
 #pragma once
 #include "card_pile.h"
-#include "talon.h"
-#include "foundation_pile.h"
 
 class TableauPile : public CardPile
 {
@@ -16,13 +14,13 @@ public:
   const std::string push(Card* card) override;
 
   // push a card pile (not flipped)
-  const std::string push(CardPile* card_pile) override;
+  const std::string push(pile_t cards) override;
+
+  // pop cards and flip
+  const std::string pop(const unsigned int amount) override;
 
   // Get pile starting from an index number
   pile_t get_sub_pile();
-
-  // Get cards from pile
-  pile_t get_cards(CardPile* card_pile);
 
   // Update source index for tableau
   const void update_src_idx(const unsigned int idx);

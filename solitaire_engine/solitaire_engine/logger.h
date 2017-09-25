@@ -22,7 +22,6 @@ public:
   ~Logger();
 
   const void log(const LogType type, std::string text);
-  const void close();
 
   // Make it non-copyable
   Logger(const Logger& logger) = delete;
