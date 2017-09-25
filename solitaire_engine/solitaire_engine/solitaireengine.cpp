@@ -31,10 +31,9 @@ int main()
     //std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     std::cout << cmd.get_method() << cmd.get_dest() << cmd.get_src() << cmd.get_src_idx() << std::endl;
 
-    CommandResult* cr = engine.run(cmd);
-    const std::string response = cr->stringify();
+    CommandResult cr = engine.run(cmd);
+    const std::string response = cr.stringify();
     std::cout << response << std::endl;
-    delete cr;
 
     Logger::getInstance()->log(LogType::LOG_INFO, "Written: " + response);
   }

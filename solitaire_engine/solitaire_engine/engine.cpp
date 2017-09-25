@@ -47,7 +47,7 @@ void Engine::activate_piles(const bool active) {
   }
 }
 
-CommandResult* Engine::run(Command& cmd) {
+CommandResult Engine::run(Command& cmd) {
   const std::string method = cmd.get_method();
   if (method == DRAW) {
     return draw(method);
@@ -65,13 +65,13 @@ CommandResult* Engine::run(Command& cmd) {
 |*|
 \*/ // =================================
 
-CommandResult* Engine::draw(const std::string method) {
+CommandResult Engine::draw(const std::string method) {
   std::string response = stock.draw_three(talon);
 
   return get_command_result(TALON, STOCK, response);
 }
 
-CommandResult* Engine::move(Command& cmd) {
+CommandResult Engine::move(Command& cmd) {
   const int src = cmd.get_src();
   const int dest = cmd.get_dest();
   std::string retval = ERROR_TAG;
@@ -101,23 +101,23 @@ CommandResult* Engine::move(Command& cmd) {
 |*|
 \*/ // =================================
 
-CommandResult* Engine::get_command_result(const unsigned int dest_pile_num, const unsigned int src_pile_num, const std::string response) {
+CommandResult Engine::get_command_result(const unsigned int dest_pile_num, const unsigned int src_pile_num, const std::string response) {
   const bool status = response.find(ERROR_TAG) == std::string::npos;
   std::string reason = status ? NO_REASON : response.substr(7);
   std::vector<std::string> push_items;
 
   // Create command result with fields
-  CommandResult* cr = new CommandResult(status, reason);
+  CommandResult cr(status, reason);
 
   // Update the fields
   if (status) {
     push_items = Utility::split(response, ',');
 
     for (std::string card : push_items) {
-      cr->update_push(dest_pile_num, card);
+      cr.update_push(dest_pile_num, card);
     }
 
-    cr->update_pop(src_pile_num, push_items.size());
+    cr.update_pop(src_pile_num, push_items.size());
   }
 
   return cr;

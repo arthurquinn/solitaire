@@ -15,11 +15,11 @@ private:
   FoundationPile foundation[NUM_FOUNDATION_PILES];
   TableauPile tableau[NUM_TABLEAU_PILES];
 
-  CommandResult* draw(const std::string method);
-  CommandResult* move(Command& cmd);
+  CommandResult draw(const std::string method);
+  CommandResult move(Command& cmd);
   CardPile* get_src_pile(const int src, const int src_idx);
   CardPile* get_dest_pile(const int dest);
-  CommandResult* get_command_result(const unsigned int dest_pile_num, const unsigned int src_pile_num, const std::string retval);
+  CommandResult get_command_result(const unsigned int dest_pile_num, const unsigned int src_pile_num, const std::string retval);
 
 public:
   Engine();
@@ -27,5 +27,5 @@ public:
   void init();
   void deal();
   void activate_piles(const bool active);
-  CommandResult* run(Command& cmd);
+  CommandResult run(Command& cmd);
 };
