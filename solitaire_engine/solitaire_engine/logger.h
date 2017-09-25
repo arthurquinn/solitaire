@@ -1,6 +1,10 @@
 #pragma once
 #include "utility.h"
 
+#define _LOG_INFO(msg) Logger::getInstance().log(LogType::LOG_INFO, msg)
+#define _LOG_WARNING(msg) Logger::getInstance().log(LogType::LOG_WARNING, msg)
+#define _LOG_ERROR(msg) Logger::getInstance().log(LogType::LOG_ERROR, msg)
+
 enum class LogType { LOG_ERROR, LOG_WARNING, LOG_INFO };
 
 class Logger

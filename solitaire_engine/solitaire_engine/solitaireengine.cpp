@@ -14,19 +14,19 @@
 
 int main()
 {
-  Logger::getInstance().log(LogType::LOG_INFO, "Logging start.");
+  _LOG_INFO("Logging start.");
   Engine engine;
   engine.init();
   engine.deal();
   std::cout << Response::make_response(ENGINE_RESPONSE_READY) << std::endl;
   for (std::string line; std::getline(std::cin, line);) {
     Command cmd(line);
-    Logger::getInstance().log(LogType::LOG_INFO, "Received: " + line);
+    _LOG_INFO("Received: " + line);
     std::cout << cmd.get_method() << cmd.get_dest() << cmd.get_src() << cmd.get_src_idx() << std::endl;
     CommandResult cr = engine.run(cmd);
     const std::string response = cr.stringify();
     std::cout << response << std::endl;
-    Logger::getInstance().log(LogType::LOG_INFO, "Written: " + response);
+    _LOG_INFO("Written: " + response);
   }
   return 0;
 }
