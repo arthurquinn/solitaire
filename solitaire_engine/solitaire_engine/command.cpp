@@ -33,6 +33,5 @@ const int Command::get_dest() {
   return dest;
 }
 
-
 Command::~Command() {
 }

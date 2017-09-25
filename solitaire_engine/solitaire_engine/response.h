@@ -12,4 +12,3 @@ private:
 public:
   static std::string make_response(const char* text);
 };
-

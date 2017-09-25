@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "card_pile.h"
 
-
 CardPile::CardPile() {
 
 }

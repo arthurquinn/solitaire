@@ -7,7 +7,6 @@ Response::Response() {
   
 }
 
-
 Response::~Response() {
 
 }
