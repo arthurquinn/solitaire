@@ -7,7 +7,7 @@ Utility::~Utility() {}
 std::vector<std::string> Utility::split(const std::string str, const char delimeter) {
   std::vector<std::string> result;
 
-  if (str != NO_REASON) {
+  if (str != NO_REASON && str != EMPTY_LIST) {
     std::istringstream ss(str);
     std::string token;
 
@@ -16,7 +16,7 @@ std::vector<std::string> Utility::split(const std::string str, const char delime
     }
   }
   else {
-    result.push_back("xx");
+    result.push_back("");
   }
 
   return result;

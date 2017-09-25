@@ -11,8 +11,8 @@ const std::string Talon::push(Card* card) {
   return NO_REASON;
 }
 
-const std::string Talon::push(CardPile* card_pile) {
-  return ERROR_TAG + std::string("Cannot push to the talon pile.");
+const std::string Talon::push(pile_t cards) {
+  return ERROR_TAG + std::string("Cannot push group of cards to the talon pile.");
 }
 
 Talon::~Talon() {

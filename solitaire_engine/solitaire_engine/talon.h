@@ -10,7 +10,7 @@ public:
   const std::string push(Card* card) override;
 
   // push a card pile to the talon pile
-  const std::string push(CardPile* card_pile) override;
+  const std::string push(pile_t cards) override;
 
   ~Talon();
 };
