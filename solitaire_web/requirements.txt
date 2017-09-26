@@ -1,0 +1,6 @@
+# Pip Install Requirements
+# To install: pip3 install -r requirements.txt --user
+
+Flask ~= 0.12.2
+flask-socketio ~= 2.9.2
+eventlet ~= 0.21.0

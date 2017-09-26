@@ -289,3 +289,6 @@ __pycache__/
 
 *.DSYM
 .DS_Store
+
+# VS Code Config
+.vscode
