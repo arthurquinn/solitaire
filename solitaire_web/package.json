@@ -1,0 +1,24 @@
+{
+  "name": "solitaire_web",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.py",
+  "scripts": {
+    "build": "babel static/src -d static/js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arthurquinn/solitaire.git"
+  },
+  "author": "arthurquinn",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/arthurquinn/solitaire/issues"
+  },
+  "homepage": "https://github.com/arthurquinn/solitaire#readme",
+  "private": true,
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0"
+  }
+}
