@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.py",
   "scripts": {
-    "build": "browserify static/src/* -o static/js/bundle.js -t [ babelify --presets [ env ] ]"
+    "build": "browserify static/src/* -o static/js/bundle.js -t [ babelify --presets [ env ] ]",
+    "serve": "browserify static/src/* -o static/js/bundle.js -t [ babelify --presets [ env ] ] && python3 -m flask run"
   },
   "repository": {
     "type": "git",
