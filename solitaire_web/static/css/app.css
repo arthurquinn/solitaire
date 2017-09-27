@@ -1,0 +1,9 @@
+#game-canvas {
+  margin-top: 25px;
+  width: 800px;
+  height: 600px;
+  background-color: #05A305;
+}
+.container-fluid {
+  text-align: center;
+}
