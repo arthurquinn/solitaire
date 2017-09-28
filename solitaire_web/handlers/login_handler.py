@@ -12,16 +12,7 @@ class Login(object):
     database = client.user_db
     collection = database.users
     self.users = collection
-
-    # ==================== TEST ==================== #
-    collection.remove({})
-    collection.insert_one({
-      "username": 'mo@test.com',
-      "display_name": "mo",
-      "password": bcrypt.hashpw(self.encode("ic"), bcrypt.gensalt())
-    })
-    # ==================== TEST ==================== #
-
+    
 
   def encode(self, text):
     return text.encode('utf8')
