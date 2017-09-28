@@ -1,3 +1,18 @@
+const pileLocations = [
+  [ 0, 0 ],
+  [ 40, 0 ],
+  [ 50, 0 ],
+  [ 60, 0 ],
+  [ 70, 0 ],
+  [ 30, 50 ],
+  [ 30, 15 ],
+  [ 30, 25 ],
+  [ 30, 35 ],
+  [ 30, 45 ],
+  [ 30, 55 ],
+  [ 30, 65 ]
+];
+
 export default class CardSprite {
   constructor(canvas, suit, rank) {
     this.canvas = canvas;
@@ -14,6 +29,8 @@ export default class CardSprite {
     this.dHeight = this.sHeight * this.dScaleY;
   }
   draw(pile) {
+    let [ pileX, pileY ] = pileLocations[pile];
+    console.log(pileX, pileY);
     let img = new Image();
     img.onload = () => {
       this.ctx2d.drawImage(
@@ -22,8 +39,8 @@ export default class CardSprite {
         this.sy,
         this.sWidth,
         this.sHeight,
-        0,
-        0,
+        pileX,
+        pileY,
         this.dWidth,
         this.dHeight);
     }

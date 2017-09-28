@@ -15,11 +15,11 @@ export default class Board {
     }
     this.cardLayout = {
       0: [ "ha" ],
-      1: [],
-      2: [],
-      3: [],
+      1: [ "ca" ],
+      2: [ "da" ],
+      3: [ "sa" ],
       4: [],
-      5: [],
+      5: [ "hk" ],
       6: [],
       7: [],
       8: [],
@@ -32,6 +32,7 @@ export default class Board {
   draw() {
     for (let i of Object.keys(this.cardLayout)) {
       for (let card of this.cardLayout[i]) {
+        console.log(card, i);
         this.cards[card].draw(i);
       }
     }

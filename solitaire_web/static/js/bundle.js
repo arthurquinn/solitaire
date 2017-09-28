@@ -95,11 +95,11 @@ var Board = function () {
 
     this.cardLayout = {
       0: ["ha"],
-      1: [],
-      2: [],
-      3: [],
+      1: ["ca"],
+      2: ["da"],
+      3: ["sa"],
       4: [],
-      5: [],
+      5: ["hk"],
       6: [],
       7: [],
       8: [],
@@ -128,6 +128,7 @@ var Board = function () {
             for (var _iterator4 = this.cardLayout[i][Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
               var card = _step4.value;
 
+              console.log(card, i);
               this.cards[card].draw(i);
             }
           } catch (err) {
@@ -174,9 +175,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var pileLocations = [[0, 0], [40, 0], [50, 0], [60, 0], [70, 0], [30, 50], [30, 15], [30, 25], [30, 35], [30, 45], [30, 55], [30, 65]];
 
 var CardSprite = function () {
   function CardSprite(canvas, suit, rank) {
@@ -201,13 +206,14 @@ var CardSprite = function () {
     value: function draw(pile) {
       var _this = this;
 
+      var _pileLocations$pile = _slicedToArray(pileLocations[pile], 2),
+          pileX = _pileLocations$pile[0],
+          pileY = _pileLocations$pile[1];
+
+      console.log(pileX, pileY);
       var img = new Image();
       img.onload = function () {
-        console.log("sx: " + _this.sx);
-        console.log("sy: " + _this.sy);
-        console.log("sWidth: " + _this.sWidth);
-        console.log("sHeight: " + _this.sHeight);
-        _this.ctx2d.drawImage(img, _this.sx, _this.sy, _this.sWidth, _this.sHeight, 0, 0, _this.dWidth, _this.dHeight);
+        _this.ctx2d.drawImage(img, _this.sx, _this.sy, _this.sWidth, _this.sHeight, pileX, pileY, _this.dWidth, _this.dHeight);
       };
       img.src = $("#spritesheet").attr("src");
     }
