@@ -9,7 +9,7 @@ $(document).ready(function() {
       "cmd": "init"
     });
     socket.on("command_response", function(response) {
-      console.log("received data: " + response);
+      console.log(response);
     })
   });
 });

@@ -16,7 +16,7 @@ $(document).ready(function () {
       "cmd": "init"
     });
     socket.on("command_response", function (response) {
-      console.log("received data: " + response);
+      console.log(response);
     });
   });
 });
@@ -96,12 +96,12 @@ var Board = function () {
     }
 
     this.cardLayout = {
-      0: ["ha"],
-      1: ["ca"],
-      2: ["da"],
-      3: ["sa"],
+      0: [],
+      1: [],
+      2: [],
+      3: [],
       4: [],
-      5: ["hk"],
+      5: [],
       6: [],
       7: [],
       8: [],

@@ -1,7 +1,4 @@
 #/usr/bin/python3
-
-from json import JSONEncoder
-
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 from handlers.login_handler import Login
@@ -71,7 +68,7 @@ def handle_command(command):
   }
   #this will eventually be somewhere else in the code after asynchronus processing of the command,
   #but for now we can leave it here for testing
-  emit("command_response", JSONEncoder().encode(retval), json=True)
+  emit("command_response", retval, json=True)
 
 
 if __name__ == "__main__":
