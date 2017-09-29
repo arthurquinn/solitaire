@@ -7,16 +7,18 @@ var _board2 = _interopRequireDefault(_board);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var socket = io.connect("http://" + document.domain + ":" + location.port);
-socket.on("connect", function () {
-  socket.emit("my event", { data: "I\'m connected!" });
-});
-
 $(document).ready(function () {
   var canvas = document.getElementById("game-canvas");
-  console.log(canvas);
   var board = new _board2.default(canvas);
-  board.draw();
+  var socket = io.connect("http://" + document.domain + ":" + location.port);
+  socket.on("connect", function () {
+    socket.emit("command", {
+      "cmd": "init"
+    });
+    socket.on("command_response", function (response) {
+      console.log("received data: " + response);
+    });
+  });
 });
 
 },{"./board":2}],2:[function(require,module,exports){
