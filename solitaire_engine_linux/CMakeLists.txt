@@ -5,7 +5,7 @@ project(solitaire)
 #Bring the headers
 include_directories(${CMAKE_SOURCE_DIR}/include)
  
-#However, the file(GLOB...) allows for wildcard additions:
+#The file(GLOB...) allows for wildcard additions:
 file(GLOB SOURCES "src/*.cpp")
  
 add_executable(solitaire ${SOURCES})
