@@ -10,7 +10,8 @@ const void Stock::push(Card* card) {
 }
 
 const void Stock::shuffle() {
-  std::shuffle(std::begin(pile), std::end(pile), rand_eng);
+  size_t seed = std::chrono::system_clock::now().time_since_epoch().count();
+  std::shuffle(pile.begin(), pile.end(), std::default_random_engine(seed));
 }
 
 const std::vector<std::string> Stock::draw_three(CardPile& target_pile) {

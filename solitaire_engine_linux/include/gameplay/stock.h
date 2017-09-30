@@ -4,9 +4,6 @@
 
 class Stock : public CardPile
 {
-private:
-  decltype(std::default_random_engine()) rand_eng;
-
 public:
   Stock();
   ~Stock();
