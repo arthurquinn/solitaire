@@ -18,6 +18,8 @@ private:
 
 public:
   Card(const suit_t suit, const rank_t rank, const color_t color);
+  ~Card();
+
   const char * as_str() const;
   void flip(const bool face_up);
   const bool is_visible() const;
@@ -28,6 +30,4 @@ public:
   const bool is_opposite_color(const Card& card) const;
   const bool is_rank_lower(const Card& card) const;
   const bool is_same_suit(const Card& card) const;
-
-  ~Card();
 };

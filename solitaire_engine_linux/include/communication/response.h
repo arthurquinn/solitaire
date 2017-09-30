@@ -9,6 +9,7 @@ class Response
 private:
   Response();
   ~Response();
+
 public:
-  static std::string make_response(const char* text);
+  static const std::string make_response(const char* text);
 };

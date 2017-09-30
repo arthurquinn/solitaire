@@ -38,5 +38,6 @@
 #define DRAW "draw"
 
 #define NO_REASON "..."
-#define EMPTY_LIST ""
+#define EMPTY_RESPONSE ""
 #define ERROR_TAG "[Error]"
+#define INVISIBLE_CARD "xx"

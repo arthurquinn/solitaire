@@ -1,6 +1,9 @@
 #pragma once
 #include "utility.h"
 
+#define LOG_FOLDER "./logs/"
+#define LOG_FILE "solitaire"
+
 #define _LOG_INFO(msg) Logger::getInstance().log(LogType::LOG_INFO, msg)
 #define _LOG_WARNING(msg) Logger::getInstance().log(LogType::LOG_WARNING, msg)
 #define _LOG_ERROR(msg) Logger::getInstance().log(LogType::LOG_ERROR, msg)
@@ -14,14 +17,18 @@ private:
 
   std::ofstream log_file;
 
-  unsigned int num_warnings;
-  unsigned int num_errors;
+  size_t num_warnings;
+  size_t num_errors;
+
+  bool enabled;
 
 public:
-  explicit Logger(const char *file_name = "solitaire");
+  explicit Logger();
   ~Logger();
 
+  const void initialize();
   const void log(const LogType type, std::string text);
+  const void enable_logging(const bool is_enabled);
 
   // Make it non-copyable
   Logger(const Logger& logger) = delete;

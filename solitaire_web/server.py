@@ -2,11 +2,12 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 from handlers.login_handler import Login
-
+from handlers.engine_handler import Engine
 
 app = Flask(__name__)
 #app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
+engine = Engine('solitaire', debug=True)
 
 @app.route("/login", methods=['GET', 'POST'])
 def route_login():
@@ -29,43 +30,11 @@ def handle_message(message):
 
 @socketio.on("command")
 def handle_command(command):
-  print(command)
-  retval = {
-    "response": "ok",
-    "update": [{
-      "pile": 0,
-      "push": [ "xx" ],
-      "pop": 0
-    }, {
-      "pile": 6,
-      "push": [ "ha" ],
-      "pop": 0
-    }, {
-      "pile": 7,
-      "push": [ "xx", "d2" ],
-      "pop": 0
-    }, {
-      "pile": 8,
-      "push": [ "xx", "xx", "sq" ],
-      "pop": 0
-    }, {
-      "pile": 9,
-      "push": [ "xx", "xx", "xx", "s9" ],
-      "pop": 0
-    }, {
-      "pile": 10,
-      "push": [ "xx", "xx", "xx", "xx", "sk" ],
-      "pop": 0
-    }, {
-      "pile": 11,
-      "push": [ "xx", "xx", "xx", "xx", "xx", "h5" ],
-      "pop": 0
-    }, {
-      "pile": 12,
-      "push": [ "xx", "xx", "xx", "xx", "xx", "xx", "cj" ],
-      "pop": 0
-    }]
-  }
+  if(command['cmd'] == 'init'):
+    retval = engine.run()
+  else:
+    retval = engine.send(command)
+
   #this will eventually be somewhere else in the code after asynchronus processing of the command,
   #but for now we can leave it here for testing
   emit("command_response", retval, json=True)
@@ -73,5 +42,4 @@ def handle_command(command):
 
 if __name__ == "__main__":
   print("Running app...")
-  socketio.run(app)
-
+  socketio.run(app, host='0.0.0.0')

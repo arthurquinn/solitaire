@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "command.h"
+#include "communication/command.h"
 
 using namespace rapidjson;
 
@@ -17,21 +17,20 @@ Command::Command(const std::string& raw_cmd) {
   dest = document["dest"].GetInt();
 }
 
-const std::string Command::get_method() {
+const std::string Command::get_method() const {
   return method;
 }
 
-const int Command::get_src() {
+const size_t Command::get_src() const {
   return src;
 }
 
-const int Command::get_src_idx() {
+const size_t Command::get_src_idx() const {
   return src_idx;
 }
 
-const int Command::get_dest() {
+const size_t Command::get_dest() const {
   return dest;
 }
 
-Command::~Command() {
-}
+Command::~Command() {}

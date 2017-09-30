@@ -11,23 +11,26 @@ public:
   ~TableauPile();
 
   // push a single card onto the tableau pile (it is not flipped when pushed)
-  const std::string push(Card* card) override;
+  const void push(Card* card) override;
 
   // push a card pile (not flipped)
-  const std::string push(pile_t cards) override;
+  const std::string push(const pile_t cards) override;
 
   // pop cards and flip
-  const std::string pop(const unsigned int amount) override;
+  const std::string pop(const size_t amount) override;
+
+  // check if cards are valid
+  const std::string is_valid(const pile_t cards) const override;
 
   // Get pile starting from an index number
   pile_t get_sub_pile();
 
   // Update source index for tableau
-  const void update_src_idx(const unsigned int idx);
+  const void update_src_idx(const size_t idx);
 
   // Get the source index
-  const unsigned int get_src_idx();
+  const size_t get_src_idx();
 
   // print a tableau
-  void print(const int tableau_num) const;
+  const void print(const size_t tableau_num) const;
 };

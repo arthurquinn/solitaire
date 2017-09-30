@@ -4,8 +4,8 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 
-typedef std::map<const int, std::vector<std::string>> push_map_t;
-typedef std::map<const int, int> pop_map_t;
+typedef std::map<const size_t, std::vector<std::string>> push_map_t;
+typedef std::map<const size_t, size_t> pop_map_t;
 
 class CommandResult {
 private:
@@ -13,10 +13,12 @@ private:
   const std::string reason;
   push_map_t push_map;
   pop_map_t pop_map;
+  
 public:
   CommandResult(const bool status, const std::string reason);
-  void update_push(const int pile, const std::string card_str);
-  void update_pop(const int pile, const int pop_num);
-  const std::string stringify();
   ~CommandResult();
+
+  void update_push(const size_t pile, const std::string card_str);
+  void update_pop(const size_t pile, const size_t pop_num);
+  const std::string stringify();
 };

@@ -1,13 +1,13 @@
 #include "stdafx.h"
-#include "utility.h"
+#include "utilities/utility.h"
 
 Utility::Utility() {}
 Utility::~Utility() {}
 
-std::vector<std::string> Utility::split(const std::string str, const char delimeter) {
+const std::vector<std::string> Utility::split(const std::string str, const char delimeter) {
   std::vector<std::string> result;
 
-  if (str != NO_REASON && str != EMPTY_LIST) {
+  if (str != NO_REASON && str != EMPTY_RESPONSE) {
     std::istringstream ss(str);
     std::string token;
 
@@ -42,6 +42,21 @@ const std::string Utility::get_datetime(const char* format, const bool get_ms) {
   return str;
 }
 
-const void Utility::create_folder(const char* folder_path) {
-  // TODO: Cross platform way to create directory if it doesn't exist
+const bool Utility::create_folder(const char* folder_path) {
+  bool is_created = false;
+
+  #ifdef __linux__
+    struct stat info;
+    stat(folder_path, &info);
+
+    if(info.st_mode & S_IFDIR) {
+      is_created = true;
+    }
+    else {
+      mkdir(folder_path, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+      is_created = true;
+    }
+  #endif
+
+  return is_created;
 }

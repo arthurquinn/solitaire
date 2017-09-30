@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "card.h"
+#include "gameplay/card.h"
 
 Card::Card(const suit_t suit, const rank_t rank, const color_t color) : suit(suit), rank(rank), color(color) {
   char * str = new char[4];

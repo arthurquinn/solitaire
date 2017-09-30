@@ -8,17 +8,17 @@ class Command
 {
 private:
   std::string method;
-  int src;
-  int src_idx;
-  int dest;
+  size_t src;
+  size_t src_idx;
+  size_t dest;
+  
 public:
   Command(const std::string& cmd);
+  ~Command();
 
   // Access stripped command elemends
-  const std::string get_method();
-  const int get_src();
-  const int get_src_idx();
-  const int get_dest();
-
-  ~Command();
+  const std::string get_method() const;
+  const size_t get_src() const;
+  const size_t get_src_idx() const;
+  const size_t get_dest() const;
 };

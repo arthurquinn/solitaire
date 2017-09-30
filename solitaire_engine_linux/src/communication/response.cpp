@@ -1,17 +1,12 @@
 #include "stdafx.h"
-#include "response.h"
+#include "communication/response.h"
 
 using namespace rapidjson;
 
-Response::Response() {
-  
-}
+Response::Response() {}
+Response::~Response() {}
 
-Response::~Response() {
-
-}
-
-std::string Response::make_response(const char* text) {
+const std::string Response::make_response(const char* text) {
   StringBuffer buffer;
   Writer<StringBuffer> writer(buffer);
   writer.StartObject();

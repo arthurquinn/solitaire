@@ -1,24 +1,16 @@
 #include "stdafx.h"
-#include "command_result.h"
+#include "communication/command_result.h"
 
 using namespace rapidjson;
 
-//
-//// FIELD UPDATE
-//
-//FieldUpdate::FieldUpdate(const int pile, const int num_pop) : pile(pile), num_pop(num_pop) { }
-//
-//FieldUpdate::~FieldUpdate() { }
+CommandResult::CommandResult(const bool status, const std::string reason) : status(status), reason(reason) {}
+CommandResult::~CommandResult() {}
 
-// COMMAND RESULT
-
-CommandResult::CommandResult(const bool status, const std::string reason) : status(status), reason(reason) { }
-
-void CommandResult::update_push(const int pile, const std::string card_str) {
+void CommandResult::update_push(const size_t pile, const std::string card_str) {
   push_map[pile].push_back(card_str);
 }
 
-void CommandResult::update_pop(const int pile, int num_pop) {
+void CommandResult::update_pop(const size_t pile, size_t num_pop) {
   pop_map[pile] = num_pop;
 }
 
@@ -53,5 +45,3 @@ const std::string CommandResult::stringify() {
   std::string str = std::string(buffer.GetString());
   return str;
 }
-
-CommandResult::~CommandResult() { }
