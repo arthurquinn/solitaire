@@ -134,6 +134,7 @@ var Board = function () {
       }
     }
 
+    this.cards["xx"] = new _card_sprite2.default(this.canvas, 4, 1);
     this.cardLayout = [[], [], [], [], [], [], [], [], [], [], [], [], []];
   }
 
@@ -259,7 +260,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var pileLocations = [[0, 0], [10, 0], [40, 0], [50, 0], [60, 0], [70, 0], [10, 40], [50, 40], [90, 40], [130, 40], [170, 40], [210, 40], [250, 40]];
+var pileLocations = [[10, 3], [10, 0], [40, 0], [50, 0], [60, 0], [70, 0], [10, 40], [50, 40], [90, 40], [130, 40], [170, 40], [210, 40], [250, 40]];
 
 var CardSprite = function () {
   function CardSprite(canvas, suit, rank) {

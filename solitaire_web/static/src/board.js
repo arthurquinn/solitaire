@@ -15,6 +15,7 @@ export default class Board {
         this.cards[cardStr] = new CardSprite(this.canvas, suitMap[suit], rankMap[rank]);
       }
     }
+    this.cards["xx"] = new CardSprite(this.canvas, 4, 1);
     this.cardLayout = [ [], [], [], [], [], [], [], [], [], [], [], [], [] ];
   }
   update(pile, ...cards) {

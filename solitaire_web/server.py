@@ -34,7 +34,7 @@ def handle_command(command):
     "response": "ok",
     "update": [{
       "pile": 0,
-      "push": [ "d10" ],
+      "push": [ "xx" ],
       "pop": 0
     }, {
       "pile": 6,
@@ -42,27 +42,27 @@ def handle_command(command):
       "pop": 0
     }, {
       "pile": 7,
-      "push": [ "c3", "d2" ],
+      "push": [ "xx", "d2" ],
       "pop": 0
     }, {
       "pile": 8,
-      "push": [ "s4", "d5", "sq" ],
+      "push": [ "xx", "xx", "sq" ],
       "pop": 0
     }, {
       "pile": 9,
-      "push": [ "hk", "dj", "c7", "s9" ],
+      "push": [ "xx", "xx", "xx", "s9" ],
       "pop": 0
     }, {
       "pile": 10,
-      "push": [ "ca", "c2", "d3", "d4", "sk" ],
+      "push": [ "xx", "xx", "xx", "xx", "sk" ],
       "pop": 0
     }, {
       "pile": 11,
-      "push": [ "hq", "hj", "h2", "h3", "h9", "h5" ],
+      "push": [ "xx", "xx", "xx", "xx", "xx", "h5" ],
       "pop": 0
     }, {
       "pile": 12,
-      "push": [ "c4", "c5", "c6", "c8", "c9", "c10", "cj" ],
+      "push": [ "xx", "xx", "xx", "xx", "xx", "xx", "cj" ],
       "pop": 0
     }]
   }
