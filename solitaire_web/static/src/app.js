@@ -2,6 +2,8 @@ import Board from "./board"
 
 $(document).ready(function() {
   let canvas = document.getElementById("game-canvas");
+  canvas.width = 800;
+  canvas.height = 600;
   let board = new Board(canvas);
   let socket = io.connect("http://" + document.domain + ":" + location.port);
   socket.on("connect", function() {

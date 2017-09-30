@@ -11,6 +11,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 $(document).ready(function () {
   var canvas = document.getElementById("game-canvas");
+  canvas.width = 800;
+  canvas.height = 600;
   var board = new _board2.default(canvas);
   var socket = io.connect("http://" + document.domain + ":" + location.port);
   socket.on("connect", function () {
@@ -77,14 +79,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var suitMap = { "s": 0, "h": 1, "d": 2, "c": 3 };
 var rankMap = { "2": 0, "3": 1, "4": 2, "5": 3, "6": 4, "7": 5, "8": 6, "9": 7, "10": 8, "j": 9, "q": 10, "k": 11, "a": 12 };
-
 var pilesWithOffset = [6, 7, 8, 9, 10, 11, 12];
+var foundationBases = [[330, 20, 53, 79.4], [420, 20, 53, 79.4], [510, 20, 53, 79.4], [600, 20, 53, 79.4]];
+
+var drawRect = function drawRect(ctx, x, y, dx, dy) {
+  ctx.beginPath();
+  ctx.rect(x, y, dx, dy);
+  ctx.fillStyle = 'transparent';
+  ctx.fill();
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = 'black';
+  ctx.stroke();
+};
 
 var Board = function () {
   function Board(canvas) {
     _classCallCheck(this, Board);
 
     this.canvas = canvas;
+    this.ctx2d = canvas.getContext("2d");
     this.cards = {};
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -176,55 +189,24 @@ var Board = function () {
     value: function draw() {
       var _this = this;
 
-      var _loop = function _loop(index, value) {
-        var vertOffset = 0;
-        var shouldOffset = pilesWithOffset.find(function (a) {
-          return a === index;
-        });
-        var _iteratorNormalCompletion5 = true;
-        var _didIteratorError5 = false;
-        var _iteratorError5 = undefined;
-
-        try {
-          for (var _iterator5 = _this.cardLayout[index][Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-            var card = _step5.value;
-
-            _this.cards[card].draw(index, vertOffset);
-            if (shouldOffset) {
-              vertOffset += 10;
-            }
-          }
-        } catch (err) {
-          _didIteratorError5 = true;
-          _iteratorError5 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion5 && _iterator5.return) {
-              _iterator5.return();
-            }
-          } finally {
-            if (_didIteratorError5) {
-              throw _iteratorError5;
-            }
-          }
-        }
-      };
-
+      // Draw bases
       var _iteratorNormalCompletion4 = true;
       var _didIteratorError4 = false;
       var _iteratorError4 = undefined;
 
       try {
-        for (var _iterator4 = this.cardLayout.entries()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-          var _ref = _step4.value;
+        for (var _iterator4 = foundationBases[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          var foundation = _step4.value;
 
-          var _ref2 = _slicedToArray(_ref, 2);
+          var _foundation = _slicedToArray(foundation, 4),
+              x = _foundation[0],
+              y = _foundation[1],
+              dx = _foundation[2],
+              dy = _foundation[3];
 
-          var index = _ref2[0];
-          var value = _ref2[1];
-
-          _loop(index, value);
+          drawRect(this.ctx2d, x, y, dx, dy);
         }
+        // Draw cards
       } catch (err) {
         _didIteratorError4 = true;
         _iteratorError4 = err;
@@ -236,6 +218,70 @@ var Board = function () {
         } finally {
           if (_didIteratorError4) {
             throw _iteratorError4;
+          }
+        }
+      }
+
+      var _loop = function _loop(index, value) {
+        var vertOffset = 0;
+        var shouldOffset = pilesWithOffset.find(function (a) {
+          return a === index;
+        });
+        var _iteratorNormalCompletion6 = true;
+        var _didIteratorError6 = false;
+        var _iteratorError6 = undefined;
+
+        try {
+          for (var _iterator6 = _this.cardLayout[index][Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+            var card = _step6.value;
+
+            _this.cards[card].draw(index, vertOffset);
+            if (shouldOffset) {
+              vertOffset += 20;
+            }
+          }
+        } catch (err) {
+          _didIteratorError6 = true;
+          _iteratorError6 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion6 && _iterator6.return) {
+              _iterator6.return();
+            }
+          } finally {
+            if (_didIteratorError6) {
+              throw _iteratorError6;
+            }
+          }
+        }
+      };
+
+      var _iteratorNormalCompletion5 = true;
+      var _didIteratorError5 = false;
+      var _iteratorError5 = undefined;
+
+      try {
+        for (var _iterator5 = this.cardLayout.entries()[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+          var _ref = _step5.value;
+
+          var _ref2 = _slicedToArray(_ref, 2);
+
+          var index = _ref2[0];
+          var value = _ref2[1];
+
+          _loop(index, value);
+        }
+      } catch (err) {
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion5 && _iterator5.return) {
+            _iterator5.return();
+          }
+        } finally {
+          if (_didIteratorError5) {
+            throw _iteratorError5;
           }
         }
       }
@@ -260,7 +306,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var pileLocations = [[10, 3], [10, 0], [40, 0], [50, 0], [60, 0], [70, 0], [10, 40], [50, 40], [90, 40], [130, 40], [170, 40], [210, 40], [250, 40]];
+var pileLocations = [[20, 20], [60, 20], [300, 20], [400, 20], [500, 20], [600, 20], [60, 200], [150, 200], [240, 200], [330, 200], [420, 200], [510, 200], [600, 200]];
 
 var CardSprite = function () {
   function CardSprite(canvas, suit, rank) {
@@ -274,8 +320,8 @@ var CardSprite = function () {
     this.sHeight = 79.4;
     this.sx = this.sWidth * this.col;
     this.sy = this.sHeight * this.row;
-    this.dScaleX = 0.67;
-    this.dScaleY = 0.43;
+    this.dScaleX = 1;
+    this.dScaleY = 1;
     this.dWidth = this.sWidth * this.dScaleX;
     this.dHeight = this.sHeight * this.dScaleY;
   }
@@ -291,6 +337,7 @@ var CardSprite = function () {
 
       var img = new Image();
       img.onload = function () {
+        _this.ctx2d.imageSmoothingEnabled = false;
         _this.ctx2d.drawImage(img, _this.sx, _this.sy, _this.sWidth, _this.sHeight, pileX, pileY + vertOffset, _this.dWidth, _this.dHeight);
       };
       img.src = $("#spritesheet").attr("src");
