@@ -1,16 +1,17 @@
 const pileLocations = [
   [ 0, 0 ],
+  [ 10, 0 ],
   [ 40, 0 ],
   [ 50, 0 ],
   [ 60, 0 ],
   [ 70, 0 ],
-  [ 30, 50 ],
-  [ 30, 15 ],
-  [ 30, 25 ],
-  [ 30, 35 ],
-  [ 30, 45 ],
-  [ 30, 55 ],
-  [ 30, 65 ]
+  [ 10, 40 ],
+  [ 50, 40 ],
+  [ 90, 40 ],
+  [ 130, 40 ],
+  [ 170, 40 ],
+  [ 210, 40 ],
+  [ 250, 40 ]
 ];
 
 export default class CardSprite {
@@ -28,9 +29,8 @@ export default class CardSprite {
     this.dWidth = this.sWidth * this.dScaleX;
     this.dHeight = this.sHeight * this.dScaleY;
   }
-  draw(pile) {
+  draw(pile, vertOffset) {
     let [ pileX, pileY ] = pileLocations[pile];
-    console.log(pileX, pileY);
     let img = new Image();
     img.onload = () => {
       this.ctx2d.drawImage(
@@ -40,7 +40,7 @@ export default class CardSprite {
         this.sWidth,
         this.sHeight,
         pileX,
-        pileY,
+        pileY + vertOffset,
         this.dWidth,
         this.dHeight);
     }
