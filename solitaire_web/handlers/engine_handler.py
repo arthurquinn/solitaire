@@ -14,7 +14,6 @@ class Engine(object):
 
   def run(self):
     self.close()  # Close any running engines first
-    print(os.getcwd())
     
     # TODO: Pass parameters to executable for debugging
     self.engine = subprocess.Popen([self.engine_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
@@ -22,8 +21,8 @@ class Engine(object):
 
     if(response['response'] == 'ok'):
       return response
-    else:
-      return 'Error connecting to engine.'
+    
+    return 'Error connecting to engine.'
 
 
   def send(self, command):

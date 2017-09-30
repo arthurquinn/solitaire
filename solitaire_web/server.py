@@ -42,4 +42,4 @@ def handle_command(command):
 
 if __name__ == "__main__":
   print("Running app...")
-  socketio.run(app, host='0.0.0.0')
+  socketio.run(app)
