@@ -122,7 +122,7 @@ $(document).ready(function() {
   context2d.imageSmoothingEnabled = false;
   let cardImages = new Image();
   cardImages.onload = function() {
-    let socket = io.connect("http://" + document.domain + ":" + location.port);
+    let socket = io.connect("http://" + document.domain + ":" + location.port, {'sync disconnect on unload': true});
     socket.on("connect", function() {
       socket.emit("command", {
         "cmd": "init"
@@ -134,6 +134,9 @@ $(document).ready(function() {
           console.error("bad command -- some kind of error to user, e.g. you cant do that move, guy")
         }
         startGameLoop(canvas, cardImages);
+      });
+      socket.on("disconnect", function() {
+        socket.emit("disconnect");
       });
     });
   };

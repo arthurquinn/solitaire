@@ -1,12 +1,10 @@
 #include "stdafx.h"
 #include "communication/command.h"
 
-using namespace rapidjson;
-
 Command::Command(const std::string& raw_cmd) {
   const char* raw = raw_cmd.c_str();
 
-  Document document;
+  rapidjson::Document document;
   if (document.Parse(raw).HasParseError()) {
     method = COMMAND_PARSE_ERROR;
   }

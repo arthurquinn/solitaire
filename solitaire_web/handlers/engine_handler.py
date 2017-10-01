@@ -12,9 +12,7 @@ class Engine(object):
     self.engine_path = engine_execs[game_name]
 
 
-  def run(self):
-    self.close()  # Close any running engines first
-    
+  def run(self):  
     # TODO: Pass parameters to executable for debugging
     self.engine = subprocess.Popen([self.engine_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
     response = json.loads(self.engine.stdout.readline().strip())
@@ -36,5 +34,5 @@ class Engine(object):
 
   def close(self):
     if(self.engine != None):
-      self.engine.kill()
+      self.engine.terminate()
 

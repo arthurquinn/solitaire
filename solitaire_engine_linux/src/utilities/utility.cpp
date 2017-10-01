@@ -2,7 +2,6 @@
 #include "utilities/utility.h"
 
 Utility::Utility() {}
-Utility::~Utility() {}
 
 const std::vector<std::string> Utility::split(const std::string str, const char delimeter) {
   std::vector<std::string> result;
@@ -35,7 +34,7 @@ const std::string Utility::get_datetime(const char* format, const bool get_ms) {
   
   // Add ms if wanted
   if (get_ms) {
-    long long ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+    size_t ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
     str += ":" + std::to_string(ms);
   }
 
@@ -60,3 +59,5 @@ const bool Utility::create_folder(const char* folder_path) {
 
   return is_created;
 }
+
+Utility::~Utility() {}

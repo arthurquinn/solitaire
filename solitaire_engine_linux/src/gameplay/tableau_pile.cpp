@@ -5,10 +5,6 @@ TableauPile::TableauPile() {
   src_idx = 0; 
 }
 
-TableauPile::~TableauPile() {
-
-}
-
 const void TableauPile::push(Card* card) {
   pile.push_back(card);
 }
@@ -97,3 +93,5 @@ const void TableauPile::print(const size_t tableau_num) const {
     std::cout << "Tableau" << tableau_num << ": " << *card << ", FaceUp: " << card->is_visible() << std::endl;
   }
 }
+
+TableauPile::~TableauPile() {}

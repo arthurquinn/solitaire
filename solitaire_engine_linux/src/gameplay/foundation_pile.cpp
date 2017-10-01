@@ -2,8 +2,6 @@
 #include "gameplay/foundation_pile.h"
 
 FoundationPile::FoundationPile() {}
-FoundationPile::~FoundationPile() {}
-
 
 const void FoundationPile::push(Card* card) {
     pile.push_back(card);
@@ -52,3 +50,5 @@ const std::string FoundationPile::is_valid(const pile_t cards) const {
 const int FoundationPile::count() const {
   return pile.size();
 }
+
+FoundationPile::~FoundationPile() {}

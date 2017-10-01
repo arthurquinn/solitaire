@@ -2,7 +2,6 @@
 #include "gameplay/engine.h"
 
 Engine::Engine() {}
-Engine::~Engine() {}
 
 const void Engine::init() {
   for (size_t i = 0; i < NUM_CARDS; i++) {
@@ -20,7 +19,7 @@ CommandResult Engine::deal() {
     }
   }
 
-  return get_init_command_result();
+  return get_deal_command_result();
 }
 
 CommandResult Engine::run(const Command& cmd) {
@@ -113,12 +112,12 @@ CommandResult Engine::get_command_result(const size_t dest_pile_num, const std::
   return cr;
 }
 
-CommandResult Engine::get_init_command_result() const {
+CommandResult Engine::get_deal_command_result() const {
   CommandResult cr(true, "...");
 
   // STOCK
   for(size_t i = 0; i < stock.get_pile_size(); i++) {
-    cr.update_push(STOCK, "xx");
+    cr.update_push(STOCK, INVISIBLE_CARD);
   }
   cr.update_pop(STOCK, 0);
 
@@ -143,14 +142,14 @@ pile_t Engine::get_cards(CardPile* card_pile) const {
   pile_t src_pile;
 
   if (card_pile->get_pile_size() > 0) {
-    if (Talon* talon = dynamic_cast<Talon*>(card_pile)) {
-      src_pile.push_back(static_cast<Talon*>(card_pile)->get_pile().back());
+    if (Talon* talon_ptr = dynamic_cast<Talon*>(card_pile)) {
+      src_pile.push_back(talon_ptr->get_pile().back());
     }
-    else if (TableauPile* tableau = dynamic_cast<TableauPile*>(card_pile)) {
-      src_pile = tableau->get_sub_pile();
+    else if (TableauPile* tableau_ptr = dynamic_cast<TableauPile*>(card_pile)) {
+      src_pile = tableau_ptr->get_sub_pile();
     }
-    else if (FoundationPile* tableau = dynamic_cast<FoundationPile*>(card_pile)) {
-      src_pile.push_back(static_cast<FoundationPile*>(card_pile)->get_pile().back());
+    else if (FoundationPile* tableau_ptr = dynamic_cast<FoundationPile*>(card_pile)) {
+      src_pile.push_back(tableau_ptr->get_pile().back());
     }
   }
 
@@ -182,3 +181,5 @@ CardPile* Engine::get_dest_pile(const size_t dest) {
 
   return NULL;
 }
+
+Engine::~Engine() {}

@@ -10,11 +10,19 @@
 // TODO: Delete all print() methods from classes as they are only used for debugging
 // TODO: Alternatively, switch these print methods into log messages for easier debugging which can be turned off in deployment
 
+void signalHandler( int signum ) {
+  _LOG_CLOSE;
+  exit(signum);  
+}
+
 int main(int argc, char* argv[])
 {
+  // Handle terminations
+  signal(SIGINT, signalHandler);
+
   // Enable logging if debug
   if(argc == 2 && std::string(argv[1]) == "--debug") {
-    Logger::getInstance().enable_logging(true);
+    _LOG_ENABLE(true);
   }
 
   // Start game

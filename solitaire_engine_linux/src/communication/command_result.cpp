@@ -1,10 +1,7 @@
 #include "stdafx.h"
 #include "communication/command_result.h"
 
-using namespace rapidjson;
-
 CommandResult::CommandResult(const bool status, const std::string reason) : status(status), reason(reason) {}
-CommandResult::~CommandResult() {}
 
 void CommandResult::update_push(const size_t pile, const std::string card_str) {
   push_map[pile].push_back(card_str);
@@ -15,8 +12,8 @@ void CommandResult::update_pop(const size_t pile, size_t num_pop) {
 }
 
 const std::string CommandResult::stringify() {
-  StringBuffer buffer;
-  Writer<StringBuffer> writer(buffer);
+  rapidjson::StringBuffer buffer;
+  rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
   writer.StartObject();
   writer.Key(RESPONSE_KEY);
   writer.String(status ? ENGINE_RESPONSE_OK : ENGINE_RESPONSE_ERROR);
@@ -45,3 +42,5 @@ const std::string CommandResult::stringify() {
   std::string str = std::string(buffer.GetString());
   return str;
 }
+
+CommandResult::~CommandResult() {}

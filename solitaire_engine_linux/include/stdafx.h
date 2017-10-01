@@ -22,6 +22,7 @@
 #include <ctime>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <csignal>
 
 #ifdef _WIN32
   #include <tchar.h>

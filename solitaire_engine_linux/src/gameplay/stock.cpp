@@ -2,7 +2,6 @@
 #include "gameplay/stock.h"
 
 Stock::Stock() {}
-Stock::~Stock() {}
 
 const void Stock::push(Card* card) {
   card->flip(false);
@@ -108,3 +107,5 @@ const void Stock::print() const {
     std::cout << "Stock: " << *card << std::endl;
   }
 }
+
+Stock::~Stock() {}
