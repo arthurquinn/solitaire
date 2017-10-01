@@ -10,11 +10,12 @@ class Engine(object):
     }
     self.engine = None
     self.engine_path = engine_execs[game_name]
+    self.debug_arg = "--debug" if debug else ""
 
 
   def run(self):  
     # TODO: Pass parameters to executable for debugging
-    self.engine = subprocess.Popen([self.engine_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+    self.engine = subprocess.Popen([self.engine_path, self.debug_arg], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
     response = json.loads(self.engine.stdout.readline().strip())
 
     if(response['response'] == 'ok'):
