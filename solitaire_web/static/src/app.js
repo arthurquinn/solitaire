@@ -16,7 +16,7 @@ $(document).ready(function() {
       });
       socket.on("command_response", function(response) {
         if (response.response == "ok") {
-          game.pushUpdate(response);
+          game.pushResponse(response);
         } else {
           console.error("bad command -- some kind of error to user, e.g. you cant do that move, guy")
         }
