@@ -59,9 +59,10 @@ var cardWidth = 53;
 var cardHeight = 79.4;
 var suitMap = { "s": 0, "h": 1, "d": 2, "c": 3, "x": 4 };
 var rankMap = { "2": 0, "3": 1, "4": 2, "5": 3, "6": 4, "7": 5, "8": 6, "9": 7, "10": 8, "j": 9, "q": 10, "k": 11, "a": 12, "x": 1 };
-var pilesWithOffset = [6, 7, 8, 9, 10, 11, 12];
+var pilesWithVOffset = [6, 7, 8, 9, 10, 11, 12];
+var pilesWithHOffset = [1];
 var foundationBases = [[330, 20, 53, 79.4], [420, 20, 53, 79.4], [510, 20, 53, 79.4], [600, 20, 53, 79.4]];
-var pileLocations = [[20, 20], [60, 20], [300, 20], [400, 20], [500, 20], [600, 20], [60, 200], [150, 200], [240, 200], [330, 200], [420, 200], [510, 200], [600, 200]];
+var pileLocations = [[20, 20], [110, 20], [300, 20], [400, 20], [500, 20], [600, 20], [60, 200], [150, 200], [240, 200], [330, 200], [420, 200], [510, 200], [600, 200]];
 
 function spritesheetLocation(cardStr) {
   var suit = cardStr.slice(0, 1);
@@ -227,17 +228,26 @@ var Game = function () {
       }
 
       var _loop2 = function _loop2(index, entry) {
-        var shouldUpdate = pilesWithOffset.find(function (a) {
+        var shouldVOffset = pilesWithVOffset.find(function (a) {
           return a === index;
         });
+        var shouldHOffset = pilesWithHOffset.find(function (a) {
+          return a === index;
+        });
+        var hoffset = 0;
         var voffset = 0;
         var _iteratorNormalCompletion4 = true;
         var _didIteratorError4 = false;
         var _iteratorError4 = undefined;
 
         try {
-          for (var _iterator4 = entry[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-            var card = _step4.value;
+          for (var _iterator4 = entry.entries()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+            var _ref3 = _step4.value;
+
+            var _ref4 = _slicedToArray(_ref3, 2);
+
+            var cidx = _ref4[0];
+            var card = _ref4[1];
 
             var _spritesheetLocation = spritesheetLocation(card),
                 _spritesheetLocation2 = _slicedToArray(_spritesheetLocation, 2),
@@ -248,9 +258,12 @@ var Game = function () {
                 pileX = _pileLocations$index[0],
                 pileY = _pileLocations$index[1];
 
-            _this2.context2d.drawImage(_this2.image, sx, sy, cardWidth, cardHeight, pileX, pileY + voffset, cardWidth, cardHeight);
-            if (shouldUpdate) {
+            _this2.context2d.drawImage(_this2.image, sx, sy, cardWidth, cardHeight, pileX + hoffset, pileY + voffset, cardWidth, cardHeight);
+            if (shouldVOffset) {
               voffset += 20;
+            }
+            if (shouldHOffset && entry.length - cidx <= 3) {
+              hoffset += 15;
             }
           }
         } catch (err) {

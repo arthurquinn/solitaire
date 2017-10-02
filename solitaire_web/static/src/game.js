@@ -2,11 +2,12 @@ const cardWidth = 53;
 const cardHeight = 79.4;
 const suitMap = { "s": 0, "h": 1, "d": 2, "c": 3, "x": 4 };
 const rankMap = { "2": 0, "3": 1, "4": 2, "5": 3, "6": 4, "7": 5, "8": 6, "9": 7, "10": 8, "j": 9, "q": 10, "k": 11, "a": 12, "x": 1 };
-const pilesWithOffset = [ 6, 7, 8, 9, 10, 11, 12 ];
+const pilesWithVOffset = [ 6, 7, 8, 9, 10, 11, 12 ];
+const pilesWithHOffset = [ 1 ];
 const foundationBases = [ [330, 20, 53, 79.4], [420, 20, 53, 79.4], [510, 20, 53, 79.4], [600, 20, 53, 79.4] ];
 const pileLocations = [
   [ 20, 20 ],
-  [ 60, 20 ],
+  [ 110, 20 ],
   [ 300, 20 ],
   [ 400, 20 ],
   [ 500, 20 ],
@@ -111,9 +112,11 @@ export default class Game {
       drawRect(this.context2d, x, y, dx, dy);
     }
     for (const [ index, entry ] of this.cardLayout.entries()) {
-      const shouldUpdate = pilesWithOffset.find(a => a === index);
+      const shouldVOffset = pilesWithVOffset.find(a => a === index);
+      const shouldHOffset = pilesWithHOffset.find(a => a === index);
+      let hoffset = 0;
       let voffset = 0;
-      for (const card of entry) {
+      for (const [ cidx, card ] of entry.entries()) {
         const [ sx, sy ] = spritesheetLocation(card);
         const [ pileX, pileY ] = pileLocations[index];
         this.context2d.drawImage(
@@ -122,12 +125,15 @@ export default class Game {
           sy,
           cardWidth,
           cardHeight,
-          pileX,
+          pileX + hoffset,
           pileY + voffset,
           cardWidth,
           cardHeight);
-        if (shouldUpdate) {
+        if (shouldVOffset) {
           voffset += 20;
+        }
+        if (shouldHOffset && entry.length - cidx <= 3) {
+          hoffset += 15;
         }
       }
     }
