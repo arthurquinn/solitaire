@@ -1,7 +1,54 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
+var _game = require("./game");
+
+var _game2 = _interopRequireDefault(_game);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+$(document).ready(function () {
+  var canvas = document.getElementById("game-canvas");
+  canvas.width = 800;
+  canvas.height = 600;
+  var context2d = canvas.getContext("2d");
+  context2d.imageSmoothingEnabled = false;
+  var cardImages = new Image();
+  cardImages.onload = function () {
+    var socket = io.connect("http://" + document.domain + ":" + location.port, { 'sync disconnect on unload': true });
+    socket.on("connect", function () {
+      var game = new _game2.default(canvas, cardImages);
+      socket.emit("command", {
+        "cmd": "init"
+      });
+      socket.on("command_response", function (response) {
+        if (response.response == "ok") {
+          game.pushUpdate(response);
+        } else {
+          console.error("bad command -- some kind of error to user, e.g. you cant do that move, guy");
+        }
+      });
+      socket.on("disconnect", function () {
+        socket.emit("disconnect");
+      });
+      game.run();
+    });
+  };
+  cardImages.src = $("#spritesheet").attr("src");
+});
+
+},{"./game":2}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -12,8 +59,6 @@ var rankMap = { "2": 0, "3": 1, "4": 2, "5": 3, "6": 4, "7": 5, "8": 6, "9": 7, 
 var pilesWithOffset = [6, 7, 8, 9, 10, 11, 12];
 var foundationBases = [[330, 20, 53, 79.4], [420, 20, 53, 79.4], [510, 20, 53, 79.4], [600, 20, 53, 79.4]];
 var pileLocations = [[20, 20], [60, 20], [300, 20], [400, 20], [500, 20], [600, 20], [60, 200], [150, 200], [240, 200], [330, 200], [420, 200], [510, 200], [600, 200]];
-
-var cardLayout = [[], [], [], [], [], [], [], [], [], [], [], [], []];
 
 function spritesheetLocation(cardStr) {
   var suit = cardStr.slice(0, 1);
@@ -31,7 +76,7 @@ var drawRect = function drawRect(ctx, x, y, dx, dy) {
   ctx.stroke();
 };
 
-function drawLayout(context2d, image) {
+function draw(context2d, image, cardLayout) {
   context2d.clearRect(0, 0, 800, 600);
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
@@ -138,21 +183,21 @@ function drawLayout(context2d, image) {
   }
 }
 
-function updateLayout(response) {
+function update(layout, response) {
   var _iteratorNormalCompletion4 = true;
   var _didIteratorError4 = false;
   var _iteratorError4 = undefined;
 
   try {
     for (var _iterator4 = response.update[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-      var _cardLayout$update$pi;
+      var _layout$_update$pile;
 
-      var update = _step4.value;
+      var _update = _step4.value;
 
-      for (var i = 0; i < update.pop; i++) {
-        cardLayout[update.pile].pop();
+      for (var i = 0; i < _update.pop; i++) {
+        layout[_update.pile].pop();
       }
-      (_cardLayout$update$pi = cardLayout[update.pile]).push.apply(_cardLayout$update$pi, _toConsumableArray(update.push));
+      (_layout$_update$pile = layout[_update.pile]).push.apply(_layout$_update$pile, _toConsumableArray(_update.push));
     }
   } catch (err) {
     _didIteratorError4 = true;
@@ -170,68 +215,69 @@ function updateLayout(response) {
   }
 }
 
-function startGameLoop(canvas, cardImages) {
-  var context2d = canvas.getContext("2d");
-  // const fps = 30;
-  // let bX = 30;
-  // let bY = 30;
-  // let mX = 150;
-  // let mY = 300;
-  // let lastTime = (new Date()).getTime();
-  // let currentTime = 0;
-  // let delta = 0;
+var Game = function () {
+  function Game(canvas, image) {
+    _classCallCheck(this, Game);
 
-  var gameLoop = function gameLoop() {
-    window.requestAnimationFrame(gameLoop);
+    this.context2d = canvas.getContext("2d");
+    this.image = image;
+    this.cardLayout = [[], [], [], [], [], [], [], [], [], [], [], [], []];
+    this.updates = [];
+  }
 
-    drawLayout(context2d, cardImages);
-    // currentTime = (new Date()).getTime();
-    // delta = (currentTime - lastTime) / 1000;
-    // context2d.clearRect(0, 0, canvas.width, canvas.height);
+  _createClass(Game, [{
+    key: "pushUpdate",
+    value: function pushUpdate(update) {
+      this.updates.push(update);
+    }
+  }, {
+    key: "run",
+    value: function run() {
+      var _this = this;
 
-    // context2d.beginPath();
-    // context2d.fillStyle = 'red';
-    // context2d.arc(bX, bY, 20, 0, Math.PI * 360);
-    // context2d.fill();
-    // if (bX >= cw || bX <= 0) {
-    //     mX *= -1;
-    // }
-    // if (bY >= ch || bY <= 0) {
-    //     mY *= -1;
-    // }
+      // const fps = 30;
+      // let bX = 30;
+      // let bY = 30;
+      // let mX = 150;
+      // let mY = 300;
+      // let lastTime = (new Date()).getTime();
+      // let currentTime = 0;
+      // let delta = 0;
 
-    // bX += (mX * delta);
-    // bY += (mY * delta);
+      var gameLoop = function gameLoop() {
+        window.requestAnimationFrame(gameLoop);
 
-    // lastTime = currentTime;
-  };
-  gameLoop();
-}
-
-$(document).ready(function () {
-  var canvas = document.getElementById("game-canvas");
-  canvas.width = 800;
-  canvas.height = 600;
-  var context2d = canvas.getContext("2d");
-  context2d.imageSmoothingEnabled = false;
-  var cardImages = new Image();
-  cardImages.onload = function () {
-    var socket = io.connect("http://" + document.domain + ":" + location.port);
-    socket.on("connect", function () {
-      socket.emit("command", {
-        "cmd": "init"
-      });
-      socket.on("command_response", function (response) {
-        if (response.response == "ok") {
-          updateLayout(response);
-        } else {
-          console.error("bad command -- some kind of error to user, e.g. you cant do that move, guy");
+        if (_this.updates.length > 0) {
+          update(_this.cardLayout, _this.updates.shift());
         }
-        startGameLoop(canvas, cardImages);
-      });
-    });
-  };
-  cardImages.src = $("#spritesheet").attr("src");
-});
+        draw(_this.context2d, _this.image, _this.cardLayout);
+        // currentTime = (new Date()).getTime();
+        // delta = (currentTime - lastTime) / 1000;
+        // context2d.clearRect(0, 0, canvas.width, canvas.height);
 
-},{}]},{},[1]);
+        // context2d.beginPath();
+        // context2d.fillStyle = 'red';
+        // context2d.arc(bX, bY, 20, 0, Math.PI * 360);
+        // context2d.fill();
+        // if (bX >= cw || bX <= 0) {
+        //     mX *= -1;
+        // }
+        // if (bY >= ch || bY <= 0) {
+        //     mY *= -1;
+        // }
+
+        // bX += (mX * delta);
+        // bY += (mY * delta);
+
+        // lastTime = currentTime;
+      };
+      gameLoop();
+    }
+  }]);
+
+  return Game;
+}();
+
+exports.default = Game;
+
+},{}]},{},[1,2]);
