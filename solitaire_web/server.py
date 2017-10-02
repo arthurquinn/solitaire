@@ -40,7 +40,7 @@ def handle_command(command):
     retval = engine.run()
   else:
     print("sending: " + json.dumps(command))
-    retval = engine.send(json.dumps(command))
+    retval = engine.send(json.dumps(command) + "\r\n")
   
   # this will eventually be somewhere else in the code after asynchronus processing of the command,
   # but for now we can leave it here for testing
