@@ -4,6 +4,9 @@
 
 class Stock : public CardPile
 {
+private:
+  bool pile_reset;
+
 public:
   Stock();
   ~Stock();
@@ -22,6 +25,9 @@ public:
 
   // reset the stock pile when no cards left and cards in talon
   const std::vector<std::string> reset(CardPile& target_pile);
+
+  // get if stock just reset
+  const bool is_reset() const;
 
   // returns the number of cards in the stock
   const int count() const;

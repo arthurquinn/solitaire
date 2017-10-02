@@ -32,7 +32,6 @@ int main(int argc, char* argv[])
     engine.init();
     CommandResult deal = engine.deal();
     const std::string deal_str = deal.stringify();
-
     std::cout << deal_str << std::endl;
     _LOG_INFO("Deal: " + deal_str);
 

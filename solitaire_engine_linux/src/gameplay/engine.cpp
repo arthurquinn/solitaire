@@ -47,6 +47,13 @@ const bool Engine::check() const {
 
 CommandResult Engine::draw(const std::string method) {
   std::vector<std::string> responses = stock.draw_three(talon);
+
+  // Stock ran out of cards, thus, Stock is destination
+  if(stock.is_reset()) {
+    return get_command_result(STOCK, responses.at(0), TALON, responses.at(1));
+  }
+
+  // Stock has cards, thus, Talon is destination
   return get_command_result(TALON, responses.at(0), STOCK, responses.at(1));
 }
 

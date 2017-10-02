@@ -14,6 +14,7 @@ const void Stock::shuffle() {
 }
 
 const std::vector<std::string> Stock::draw_three(CardPile& target_pile) {
+  pile_reset = false;
   std::vector<std::string> responses;
   std::string dest_response = "";
   std::string src_response = EMPTY_RESPONSE;
@@ -31,6 +32,7 @@ const std::vector<std::string> Stock::draw_three(CardPile& target_pile) {
     }
   }
   else if(size == 0 && target_pile.get_pile_size() > 0) {
+    pile_reset = true;
     responses = reset(target_pile);
   }
   else {
@@ -46,6 +48,7 @@ const std::vector<std::string> Stock::draw_three(CardPile& target_pile) {
 }
 
 const std::vector<std::string> Stock::draw(CardPile& target_pile, const bool face_up) {
+  pile_reset = false;
   std::vector<std::string> responses;
   std::string dest_response = EMPTY_RESPONSE;
   std::string src_response = EMPTY_RESPONSE;
@@ -59,6 +62,7 @@ const std::vector<std::string> Stock::draw(CardPile& target_pile, const bool fac
     dest_response = std::string(face_up ? card->as_str() : INVISIBLE_CARD);
   }
   else if (size == 0 && target_pile.get_pile_size() > 0) {
+    pile_reset = true;
     responses = reset(target_pile);
   }
   else {
@@ -96,6 +100,10 @@ const std::vector<std::string> Stock::reset(CardPile& target_pile) {
   responses.push_back(src_response);
 
   return responses;
+}
+
+const bool Stock::is_reset() const {
+  return pile_reset;
 }
 
 const int Stock::count() const {
