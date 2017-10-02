@@ -25,23 +25,29 @@ int main(int argc, char* argv[])
     _LOG_ENABLE(true);
   }
 
-  // Start game
-  _LOG_INFO("Logging start.");
-  Engine engine;
-  engine.init();
-  CommandResult deal = engine.deal();
-  const std::string deal_str = deal.stringify();
+  try {
+    // Start game
+    _LOG_INFO("Logging start.");
+    Engine engine;
+    engine.init();
+    CommandResult deal = engine.deal();
+    const std::string deal_str = deal.stringify();
 
-  std::cout << deal_str << std::endl;
-  _LOG_INFO("Deal: " + deal_str);
+    std::cout << deal_str << std::endl;
+    _LOG_INFO("Deal: " + deal_str);
 
-  for (std::string line; std::getline(std::cin, line);) {
-    Command cmd(line);
-    _LOG_INFO("Received: " + line);
-    CommandResult cr = engine.run(cmd);
-    const std::string response = cr.stringify();
-    std::cout << response << std::endl;
-    _LOG_INFO("Written: " + response);
+    for (std::string line; std::getline(std::cin, line);) {
+      Command cmd(line);
+      _LOG_INFO("Received: " + line);
+      CommandResult cr = engine.run(cmd);
+      const std::string response = cr.stringify();
+      std::cout << response << std::endl;
+      _LOG_INFO("Written: " + response);
+    }
+  } catch (std::exception& e) {
+    std::stringstream error;
+    error << "Uncaught exception: " << e.what();
+    _LOG_ERROR(error.str());
   }
 
   return 0;

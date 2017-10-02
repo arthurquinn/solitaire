@@ -10,9 +10,11 @@ Command::Command(const std::string& raw_cmd) {
   }
 
   method = document["cmd"].GetString();
-  src = document["src"].GetInt();
-  src_idx = document["src_idx"].GetInt();
-  dest = document["dest"].GetInt();
+  if (method.compare("draw")) {
+    src = document["src"].GetInt();
+    src_idx = document["src_idx"].GetInt();
+    dest = document["dest"].GetInt();
+  }
 }
 
 const std::string Command::get_method() const {
