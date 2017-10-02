@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+
+import json
+
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 from handlers.login_handler import Login
@@ -36,11 +39,13 @@ def handle_command(command):
   if(command['cmd'] == 'init'):
     retval = engine.run()
   else:
-    retval = engine.send(command)
-
+    print("sending: " + json.dumps(command))
+    retval = engine.send(json.dumps(command))
+  
   # this will eventually be somewhere else in the code after asynchronus processing of the command,
   # but for now we can leave it here for testing
-  emit("command_response", retval, json=True)
+  print("emitting " + str(retval))
+  emit("command_response", retval)
 
 
 @socketio.on("disconnect")

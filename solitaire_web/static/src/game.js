@@ -36,19 +36,59 @@ function drawRect(ctx, x, y, dx, dy) {
   ctx.stroke();
 }
 
+function coordIn(coord, rect) {
+  const [ x, y ] = coord;
+  const [ rx, ry, rdx, rdy ] = rect;
+  return rx - x < 0 && rx + rdx - x > 0 && 
+         ry - y < 0 && ry + rdy - y > 0;
+}
+
+function cardAtCoords(layout, x, y) {
+  if (coordIn([x, y], pileLocations[0].concat([cardWidth, cardHeight]))) {
+    return "deck";
+  }
+}
+
 export default class Game {
-  constructor(canvas, image) {
+
+  constructor(canvas, image, sendCmd) {
+    this.canvas = canvas;
     this.context2d = canvas.getContext("2d");
     this.image = image;
+    this.sendCmd = sendCmd;
     this.cardLayout = [ [], [], [], [], [], [], [], [], [], [], [], [], [] ];
     this.responses = [];
+    this.commands = [];
+
+    this.canvas.addEventListener("mousedown", e => this._mousedown(e), false);
+    this.canvas.addEventListener("mouseup", e => this._mouseup(e), false);
   }
+
   pushResponse(response) {
     this.responses.push(response);
   }
+  
   run() {
     this._loop();
   }
+
+  _mousedown(e) {
+    console.log("drag start: ", e.offsetX, e.offsetY);
+    const card = cardAtCoords(this.cardLayout, e.offsetX, e.offsetY);
+    if (card) {
+      switch (card) {
+      case "deck":
+        this.commands.push({
+          cmd: "draw"
+        });
+      }
+    }
+  }
+
+  _mouseup(e) {
+    console.log("drag end: ", e.offsetX, e.offsetY);
+  }
+
   _update() {
     if (this.responses.length > 0) {
       const response = this.responses.shift();
@@ -59,7 +99,11 @@ export default class Game {
         this.cardLayout[update.pile].push(...update.push);
       }
     }
+    if (this.commands.length > 0) {
+      this.sendCmd(this.commands.shift());
+    }
   }
+
   _draw() {
     this.context2d.clearRect(0, 0, 800, 600);
     for (const foundation of foundationBases) {
@@ -88,6 +132,7 @@ export default class Game {
       }
     }
   }
+
   _loop() {
     window.requestAnimationFrame(() => this._loop());
     this._update();

@@ -17,20 +17,23 @@ $(document).ready(function () {
   cardImages.onload = function () {
     var socket = io.connect("http://" + document.domain + ":" + location.port, { 'sync disconnect on unload': true });
     socket.on("connect", function () {
-      var game = new _game2.default(canvas, cardImages);
+      var game = new _game2.default(canvas, cardImages, function (cmd) {
+        socket.emit("command", cmd);
+      });
       socket.emit("command", {
         "cmd": "init"
       });
       socket.on("command_response", function (response) {
+        console.log(response);
         if (response.response == "ok") {
           game.pushResponse(response);
         } else {
           console.error("bad command -- some kind of error to user, e.g. you cant do that move, guy");
         }
       });
-      socket.on("disconnect", function () {
-        socket.emit("disconnect");
-      });
+      // socket.on("disconnect", function() {
+      //   socket.emit("disconnect");
+      // });
       game.run();
     });
   };
@@ -44,9 +47,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -76,14 +79,46 @@ function drawRect(ctx, x, y, dx, dy) {
   ctx.stroke();
 }
 
+function coordIn(coord, rect) {
+  var _coord = _slicedToArray(coord, 2),
+      x = _coord[0],
+      y = _coord[1];
+
+  var _rect = _slicedToArray(rect, 4),
+      rx = _rect[0],
+      ry = _rect[1],
+      rdx = _rect[2],
+      rdy = _rect[3];
+
+  return rx - x < 0 && rx + rdx - x > 0 && ry - y < 0 && ry + rdy - y > 0;
+}
+
+function cardAtCoords(layout, x, y) {
+  if (coordIn([x, y], pileLocations[0].concat([cardWidth, cardHeight]))) {
+    return "deck";
+  }
+}
+
 var Game = function () {
-  function Game(canvas, image) {
+  function Game(canvas, image, sendCmd) {
+    var _this = this;
+
     _classCallCheck(this, Game);
 
+    this.canvas = canvas;
     this.context2d = canvas.getContext("2d");
     this.image = image;
+    this.sendCmd = sendCmd;
     this.cardLayout = [[], [], [], [], [], [], [], [], [], [], [], [], []];
     this.responses = [];
+    this.commands = [];
+
+    this.canvas.addEventListener("mousedown", function (e) {
+      return _this._mousedown(e);
+    }, false);
+    this.canvas.addEventListener("mouseup", function (e) {
+      return _this._mouseup(e);
+    }, false);
   }
 
   _createClass(Game, [{
@@ -95,6 +130,25 @@ var Game = function () {
     key: "run",
     value: function run() {
       this._loop();
+    }
+  }, {
+    key: "_mousedown",
+    value: function _mousedown(e) {
+      console.log("drag start: ", e.offsetX, e.offsetY);
+      var card = cardAtCoords(this.cardLayout, e.offsetX, e.offsetY);
+      if (card) {
+        switch (card) {
+          case "deck":
+            this.commands.push({
+              cmd: "draw"
+            });
+        }
+      }
+    }
+  }, {
+    key: "_mouseup",
+    value: function _mouseup(e) {
+      console.log("drag end: ", e.offsetX, e.offsetY);
     }
   }, {
     key: "_update",
@@ -131,11 +185,14 @@ var Game = function () {
           }
         }
       }
+      if (this.commands.length > 0) {
+        this.sendCmd(this.commands.shift());
+      }
     }
   }, {
     key: "_draw",
     value: function _draw() {
-      var _this = this;
+      var _this2 = this;
 
       this.context2d.clearRect(0, 0, 800, 600);
       var _iteratorNormalCompletion2 = true;
@@ -191,7 +248,7 @@ var Game = function () {
                 pileX = _pileLocations$index[0],
                 pileY = _pileLocations$index[1];
 
-            _this.context2d.drawImage(_this.image, sx, sy, cardWidth, cardHeight, pileX, pileY + voffset, cardWidth, cardHeight);
+            _this2.context2d.drawImage(_this2.image, sx, sy, cardWidth, cardHeight, pileX, pileY + voffset, cardWidth, cardHeight);
             if (shouldUpdate) {
               voffset += 20;
             }
@@ -245,10 +302,10 @@ var Game = function () {
   }, {
     key: "_loop",
     value: function _loop() {
-      var _this2 = this;
+      var _this3 = this;
 
       window.requestAnimationFrame(function () {
-        return _this2._loop();
+        return _this3._loop();
       });
       this._update();
       this._draw();

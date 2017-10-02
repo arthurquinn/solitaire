@@ -10,20 +10,23 @@ $(document).ready(function() {
   cardImages.onload = function() {
     let socket = io.connect("http://" + document.domain + ":" + location.port, {'sync disconnect on unload': true});
     socket.on("connect", function() {
-      let game = new Game(canvas, cardImages);
+      let game = new Game(canvas, cardImages, function(cmd) {
+        socket.emit("command", cmd);
+      });
       socket.emit("command", {
         "cmd": "init"
       });
       socket.on("command_response", function(response) {
+        console.log(response);
         if (response.response == "ok") {
           game.pushResponse(response);
         } else {
           console.error("bad command -- some kind of error to user, e.g. you cant do that move, guy")
         }
       });
-      socket.on("disconnect", function() {
-        socket.emit("disconnect");
-      });
+      // socket.on("disconnect", function() {
+      //   socket.emit("disconnect");
+      // });
       game.run();
     });
   };
