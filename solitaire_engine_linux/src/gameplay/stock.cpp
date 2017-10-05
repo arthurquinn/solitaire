@@ -87,13 +87,13 @@ const std::vector<std::string> Stock::reset(CardPile& target_pile) {
   src_response = talon.pop(talon.get_pile_size());
   const size_t size = cards.size();
 
-  for (size_t i = 0; i < size; i++) {
+  for (signed int i = size-1; i >= 0; i--) {
     Card* card = cards.at(i);
     card->flip(false);
     pile.push_back(card);
 
     dest_response += INVISIBLE_CARD;
-    dest_response += (i != size-1) ? "," : "";
+    dest_response += (i != 0) ? "," : "";
   }
 
   responses.push_back(dest_response);
